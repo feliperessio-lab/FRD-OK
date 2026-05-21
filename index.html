@@ -1,0 +1,2529 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>FRD — Desenvolvimento Web Premium | Sites, Landing Pages e Rebranding</title>
+<meta name="description" content="Estúdio de desenvolvimento web premium em São Paulo. Sites sob medida, landing pages de alta conversão e rebranding digital para clínicas, advogados, imobiliárias e marcas de luxo no Brasil." />
+<meta name="keywords" content="desenvolvimento de sites premium, criação de sites em São Paulo, site para clínica médica, site para advogados, site para imobiliária de luxo, landing page de alta conversão, rebranding de site, agência de sites premium Brasil" />
+<meta name="author" content="FRD — Felipe Réssio Development" />
+
+<!-- Open Graph -->
+<meta property="og:type" content="website" />
+<meta property="og:title" content="FRD — Desenvolvimento Web Premium" />
+<meta property="og:description" content="Sites sob medida, landing pages de alta conversão e rebranding digital. Estúdio premium em São Paulo." />
+<meta property="og:image" content="og-image.jpg" />
+<meta property="og:locale" content="pt_BR" />
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="FRD — Desenvolvimento Web Premium" />
+<meta name="twitter:description" content="Sites de alto padrão para nichos premium. Cada projeto, uma identidade." />
+
+<!-- Schema.org -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "FRD — Felipe Réssio Development",
+  "description": "Estúdio de desenvolvimento web premium especializado em sites de alto padrão para nichos premium.",
+  "url": "https://frd.dev",
+  "telephone": "+55-11-00000-0000",
+  "address": {
+    "@type": "PostalAddress",
+    "addressLocality": "São Paulo",
+    "addressRegion": "SP",
+    "addressCountry": "BR"
+  },
+  "areaServed": ["BR", "Internacional"],
+  "priceRange": "$$$"
+}
+</script>
+<!-- Sitemap: /sitemap.xml · Robots: /robots.txt -->
+
+<!-- Favicon -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230A0A0A'/%3E%3Cpath d='M8 8h16M8 8v16M8 16h10' stroke='%23D4A86A' stroke-width='2.5' fill='none' stroke-linecap='square'/%3E%3Ccircle cx='24' cy='8' r='1.6' fill='%23D4A86A'/%3E%3Ccircle cx='18' cy='16' r='1.6' fill='%23D4A86A'/%3E%3Ccircle cx='8' cy='24' r='1.6' fill='%23D4A86A'/%3E%3C/svg%3E" />
+
+<!-- Fonts: Space Grotesk + Inter + JetBrains Mono -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  theme: {
+    extend: {
+      colors: {
+        ink:    '#0A0A0A',
+        ink2:   '#111111',
+        ink3:   '#161616',
+        gold:   '#D4A86A',
+        gold2:  '#E8C896',
+        gold3:  '#8B6F3E',
+        cream:  '#F5F1E8',
+        warm:   '#8A8275',
+        line:   'rgba(245, 241, 232, 0.06)',
+        lineGold: 'rgba(212, 168, 106, 0.14)',
+        avail:  '#5BA770'
+      },
+      fontFamily: {
+        display: ['"Space Grotesk"', 'sans-serif'],
+        sans: ['Inter', 'system-ui', 'sans-serif'],
+        mono: ['"JetBrains Mono"', 'monospace']
+      }
+    }
+  }
+}
+</script>
+
+<!-- GSAP + ScrollTrigger + Lenis -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
+
+<style>
+  :root {
+    --ink: #0A0A0A;
+    --ink2: #111111;
+    --gold: #D4A86A;
+    --gold2: #E8C896;
+    --gold3: #8B6F3E;
+    --cream: #F5F1E8;
+    --warm: #8A8275;
+    --line: rgba(245, 241, 232, 0.06);
+    --lineGold: rgba(212, 168, 106, 0.14);
+    --easeOutExpo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html, body {
+    background: var(--ink);
+    color: var(--cream);
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 400;
+    -webkit-font-smoothing: antialiased;
+  }
+  body {
+    overflow-x: hidden;
+  }
+
+  /* Subtle grain — kept */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.03;
+    mix-blend-mode: overlay;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 300 300' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 0.6 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Selection */
+  ::selection {
+    background: var(--gold);
+    color: var(--ink);
+  }
+
+  /* Typography */
+  .font-display { font-family: 'Space Grotesk', sans-serif; letter-spacing: -0.03em; }
+  .font-mono    { font-family: 'JetBrains Mono', monospace; }
+
+  h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 500; letter-spacing: -0.03em; }
+
+  .section-eyebrow {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--gold);
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+  .mono-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--warm);
+  }
+
+  /* Buttons — primary gold, secondary cream outline */
+  .btn-gold {
+    background: var(--gold);
+    color: var(--ink);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: transform 200ms var(--easeOutExpo), background 200ms var(--easeOutExpo), box-shadow 200ms var(--easeOutExpo);
+    border-radius: 4px;
+  }
+  .btn-gold:hover {
+    background: var(--gold2);
+    transform: scale(1.02);
+    box-shadow: 0 8px 30px -10px rgba(212, 168, 106, 0.35);
+  }
+  .btn-outline {
+    border: 1px solid rgba(245, 241, 232, 0.28);
+    color: var(--cream);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    transition: background 200ms var(--easeOutExpo), border-color 200ms var(--easeOutExpo), transform 200ms var(--easeOutExpo);
+    background: transparent;
+    border-radius: 4px;
+  }
+  .btn-outline:hover {
+    background: rgba(245, 241, 232, 0.04);
+    border-color: rgba(245, 241, 232, 0.6);
+    transform: scale(1.02);
+  }
+
+  /* Navbar */
+  #nav {
+    transition: background 300ms var(--easeOutExpo), backdrop-filter 300ms var(--easeOutExpo), border-color 300ms var(--easeOutExpo);
+    border-bottom: 1px solid transparent;
+  }
+  #nav.scrolled {
+    background: rgba(10, 10, 10, 0.78);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-link {
+    position: relative;
+    color: var(--cream);
+    opacity: 0.65;
+    transition: opacity 200ms var(--easeOutExpo);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+  .nav-link:hover { opacity: 1; }
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -6px;
+    height: 1px;
+    background: var(--cream);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 280ms var(--easeOutExpo);
+  }
+  .nav-link:hover::after { transform: scaleX(1); }
+
+  /* Language switcher */
+  .lang-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 1px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 3px;
+    background: rgba(245, 241, 232, 0.02);
+  }
+  .lang-btn {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 10px;
+    letter-spacing: 0.14em;
+    padding: 4px 8px;
+    color: var(--warm);
+    border-radius: 2px;
+    transition: color 200ms var(--easeOutExpo), background 200ms var(--easeOutExpo);
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    line-height: 1;
+  }
+  .lang-btn:hover { color: var(--cream); }
+  .lang-btn.active {
+    background: rgba(212, 168, 106, 0.14);
+    color: var(--gold);
+  }
+
+  /* Live iframe inside mock-browser */
+  .live-iframe-wrap {
+    position: absolute;
+    inset: 0;
+    background: #0c0a07;
+    overflow: hidden;
+  }
+  .live-iframe-fallback {
+    z-index: 1;
+    transition: opacity 400ms var(--easeOutExpo);
+  }
+  .live-iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 1600px;
+    height: 1000px; /* 16:10 to match mock-browser */
+    border: 0;
+    transform-origin: top left;
+    transform: scale(var(--iframe-scale, 0.5));
+    opacity: 0;
+    transition: opacity 600ms var(--easeOutExpo);
+    z-index: 2;
+    pointer-events: none; /* let scroll/scrub work; the <a> overlay handles clicks */
+  }
+  .live-iframe-wrap.loaded .live-iframe { opacity: 1; }
+  .live-iframe-wrap.loaded .live-iframe-fallback { opacity: 0; pointer-events: none; }
+
+  /* Logo trail */
+  .logo-mark { stroke: var(--gold); }
+  .logo-mark .trail {
+    stroke-dasharray: 200;
+    stroke-dashoffset: 0;
+    transition: stroke-dashoffset 1200ms var(--easeOutExpo);
+  }
+  .logo-mark:hover .trail {
+    stroke-dashoffset: 400;
+  }
+
+  /* Hero rotating word */
+  .rotate-wrap {
+    display: inline-block;
+    position: relative;
+    vertical-align: baseline;
+    color: var(--gold);
+  }
+  .rotate-word {
+    display: inline-block;
+  }
+  .rotate-char {
+    display: inline-block;
+    opacity: 0;
+    transform: translateY(0.5em);
+    transition: opacity 320ms var(--easeOutExpo), transform 420ms var(--easeOutExpo);
+  }
+  .rotate-char.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .rotate-char.out {
+    opacity: 0;
+    transform: translateY(-0.5em);
+    transition: opacity 240ms var(--easeOutExpo), transform 320ms var(--easeOutExpo);
+  }
+
+  /* Available pulse — softer green */
+  .pulse-dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--avail);
+    box-shadow: 0 0 0 0 rgba(91, 167, 112, 0.55);
+    animation: pulse 2.2s infinite;
+  }
+  @keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(91, 167, 112, 0.55); }
+    70% { box-shadow: 0 0 0 8px rgba(91, 167, 112, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(91, 167, 112, 0); }
+  }
+
+  /* Terminal background */
+  #terminal-bg {
+    position: absolute;
+    inset: 0;
+    overflow: hidden;
+    pointer-events: none;
+    opacity: 0.06;
+    mask-image: radial-gradient(ellipse at 60% 50%, #000 0%, #000 30%, transparent 80%);
+    -webkit-mask-image: radial-gradient(ellipse at 60% 50%, #000 0%, #000 30%, transparent 80%);
+  }
+  #terminal-bg .term-track {
+    position: absolute;
+    right: 4%;
+    bottom: 0;
+    width: min(620px, 60%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    line-height: 1.9;
+    color: var(--cream);
+    white-space: pre;
+    animation: termScroll 80s linear infinite;
+  }
+  @keyframes termScroll {
+    from { transform: translateY(0); }
+    to   { transform: translateY(-50%); }
+  }
+
+  /* Services hover slider */
+  .svc-row {
+    border-top: 1px solid var(--line);
+    transition: padding-left 320ms var(--easeOutExpo);
+    position: relative;
+  }
+  .svc-row:last-child { border-bottom: 1px solid var(--line); }
+  .svc-title {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    letter-spacing: -0.03em;
+    color: var(--cream);
+    transition: color 260ms var(--easeOutExpo), transform 320ms var(--easeOutExpo);
+    line-height: 1.05;
+  }
+  .svc-no {
+    color: var(--warm);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.22em;
+    transition: color 260ms var(--easeOutExpo);
+  }
+  .svc-row .svc-desc {
+    color: var(--warm);
+    font-weight: 300;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-height 320ms var(--easeOutExpo), opacity 320ms var(--easeOutExpo), margin 320ms var(--easeOutExpo);
+  }
+  .svc-row.active .svc-title { color: var(--gold); transform: translateX(12px); }
+  .svc-row.active .svc-no { color: var(--gold); }
+  .svc-row.active .svc-desc {
+    max-height: 100px; opacity: 1; margin-top: 16px;
+  }
+
+  .svc-image {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    clip-path: polygon(0 50%, 100% 50%, 100% 50%, 0 50%);
+    transition: opacity 500ms var(--easeOutExpo), clip-path 700ms var(--easeOutExpo);
+  }
+  .svc-image.active {
+    opacity: 1;
+    clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* Process */
+  .process-step-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--cream);
+    line-height: 1;
+    opacity: 0.4;
+  }
+  .process-bar {
+    position: relative;
+    height: 1px;
+    background: var(--line);
+    overflow: hidden;
+  }
+  .process-bar-fill {
+    position: absolute;
+    inset: 0;
+    background: var(--gold);
+    transform-origin: left;
+    transform: scaleX(0);
+  }
+  .process-tab {
+    transition: color 240ms var(--easeOutExpo), opacity 240ms var(--easeOutExpo);
+    color: var(--warm);
+    opacity: 0.55;
+  }
+  .process-tab.active { color: var(--cream); opacity: 1; }
+  .process-tab.active .process-tab-num { color: var(--gold); }
+  .process-tab-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: var(--warm);
+    transition: color 240ms var(--easeOutExpo);
+  }
+
+  /* Mock browser */
+  .mock-browser {
+    background: var(--ink2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .mock-bar {
+    background: #0c0c0c;
+    border-bottom: 1px solid var(--line);
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .mock-dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: rgba(255,255,255,0.08);
+  }
+  .mock-url {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--warm);
+    letter-spacing: 0.04em;
+  }
+
+  /* Testimonials */
+  .tcard {
+    background: var(--ink2);
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    transition: transform 500ms var(--easeOutExpo), opacity 500ms var(--easeOutExpo), border-color 500ms var(--easeOutExpo);
+  }
+  .tcard.center {
+    border-color: var(--lineGold);
+    z-index: 2;
+  }
+  .tcard .quote-mark {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    color: var(--gold);
+    font-size: 90px;
+    line-height: 0.6;
+    letter-spacing: -0.05em;
+  }
+
+  /* WhatsApp floating */
+  #wa-float {
+    position: fixed;
+    bottom: 24px; right: 24px;
+    width: 52px; height: 52px;
+    background: var(--gold);
+    color: var(--ink);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 50;
+    opacity: 0;
+    transform: translateY(20px) scale(0.9);
+    transition: all 320ms var(--easeOutExpo);
+    box-shadow: 0 10px 30px -10px rgba(212, 168, 106, 0.4);
+  }
+  #wa-float.visible {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  #wa-float:hover {
+    background: var(--gold2);
+    transform: translateY(-2px) scale(1.05);
+  }
+
+  /* Form */
+  .field {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid var(--line);
+    color: var(--cream);
+    padding: 14px 0;
+    width: 100%;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    transition: border-color 200ms var(--easeOutExpo);
+    border-radius: 0;
+  }
+  .field:focus {
+    outline: none;
+    border-color: var(--cream);
+  }
+  .field::placeholder { color: var(--warm); opacity: 0.6; }
+  .field-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 11px;
+    color: var(--warm);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+  select.field {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238A8275' fill='none' stroke-width='1.5'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 4px center;
+    padding-right: 24px;
+  }
+  select.field option { background: var(--ink2); color: var(--cream); }
+
+  /* Reveal */
+  .reveal {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 700ms var(--easeOutExpo), transform 700ms var(--easeOutExpo);
+  }
+  .reveal.in {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* Scroll arrow */
+  .scroll-arrow {
+    animation: scrollPulse 2.4s var(--easeOutExpo) infinite;
+  }
+  @keyframes scrollPulse {
+    0%, 100% { transform: translateY(0); opacity: 0.5; }
+    50% { transform: translateY(6px); opacity: 1; }
+  }
+
+  /* Decorative circuit (kept very sparingly) */
+  .circuit-line {
+    stroke: var(--gold);
+    stroke-width: 1;
+    fill: none;
+    opacity: 0.18;
+  }
+
+  /* Scrub */
+  .scrub-word {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    text-transform: uppercase;
+  }
+
+  .project-stage { position: relative; }
+  .project-card {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transform: scale(0.98);
+    transition: opacity 600ms var(--easeOutExpo), transform 600ms var(--easeOutExpo);
+  }
+  .project-card.active { opacity: 1; transform: scale(1); }
+
+  /* Marquee */
+  .marquee {
+    display: flex;
+    overflow: hidden;
+    gap: 60px;
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+  .marquee-track {
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    animation: marquee 60s linear infinite;
+    flex-shrink: 0;
+    padding-right: 60px;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-100%); }
+  }
+  .marquee-item {
+    font-family: 'JetBrains Mono', monospace;
+    color: var(--warm);
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .marquee-dot {
+    color: var(--warm);
+    opacity: 0.4;
+  }
+
+  /* Metrics block */
+  .metric-num {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: -0.04em;
+    line-height: 1;
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .marquee-track { animation: none; }
+    .pulse-dot { animation: none; }
+    .scroll-arrow { animation: none; }
+    #terminal-bg .term-track { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+    * { scroll-behavior: auto !important; }
+  }
+
+  @media (max-width: 768px) {
+    .svc-row .svc-desc { max-height: 60px; opacity: 0.6; margin-top: 12px; }
+    .svc-row.active .svc-desc { opacity: 1; max-height: 120px; }
+    #terminal-bg { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAVBAR ============== -->
+<nav id="nav" class="fixed top-0 left-0 right-0 z-40">
+  <div class="max-w-[1400px] mx-auto px-6 md:px-10 h-[68px] flex items-center justify-between">
+    <a href="#top" class="flex items-center group" aria-label="FRD — início">
+      <img src="FRD_logo_cream.png" alt="FRD — Felipe Réssio Development" class="h-8 md:h-9 w-auto select-none" draggable="false" />
+    </a>
+
+    <div class="hidden md:flex items-center gap-9">
+      <a href="#servicos" class="nav-link">Serviços</a>
+      <a href="#processo" class="nav-link">Processo</a>
+      <a href="#projetos" class="nav-link">Projetos</a>
+      <a href="#sobre" class="nav-link">Sobre</a>
+      <a href="#contato" class="nav-link">Contato</a>
+    </div>
+
+    <div class="hidden md:flex items-center gap-4">
+      <div class="lang-switcher" data-no-i18n>
+        <button type="button" class="lang-btn" data-lang="pt" aria-label="Português">PT</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
+        <button type="button" class="lang-btn" data-lang="es" aria-label="Español">ES</button>
+      </div>
+      <a href="https://wa.me/5511000000000?text=Olá%20Felipe,%20vim%20do%20site%20FRD"
+         target="_blank" rel="noopener"
+         class="btn-gold px-5 py-2.5 text-[11px] tracking-[0.16em] uppercase font-mono">
+        Solicitar orçamento
+      </a>
+    </div>
+    <button id="menu-btn" class="md:hidden text-cream" aria-label="Menu">
+      <svg width="22" height="22" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><path d="M3 7h18M3 17h18"/></svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="md:hidden hidden bg-ink/95 backdrop-blur-md border-t border-line">
+    <div class="px-6 py-6 flex flex-col gap-5">
+      <a href="#servicos" class="nav-link">Serviços</a>
+      <a href="#processo" class="nav-link">Processo</a>
+      <a href="#projetos" class="nav-link">Projetos</a>
+      <a href="#sobre" class="nav-link">Sobre</a>
+      <a href="#contato" class="nav-link">Contato</a>
+      <div class="lang-switcher self-start mt-1" data-no-i18n>
+        <button type="button" class="lang-btn" data-lang="pt" aria-label="Português">PT</button>
+        <button type="button" class="lang-btn" data-lang="en" aria-label="English">EN</button>
+        <button type="button" class="lang-btn" data-lang="es" aria-label="Español">ES</button>
+      </div>
+      <a href="https://wa.me/5511000000000" target="_blank" rel="noopener" class="btn-gold px-5 py-3 text-[11px] tracking-[0.16em] uppercase font-mono text-center mt-2">Solicitar orçamento</a>
+    </div>
+  </div>
+</nav>
+
+<main id="top" class="relative z-[2]">
+
+  <!-- ============== HERO — minimal + terminal bg ============== -->
+  <section class="relative min-h-[100svh] flex items-center overflow-hidden">
+
+    <!-- terminal background (subtle, opacity ~0.06) -->
+    <div id="terminal-bg" aria-hidden="true">
+      <div class="term-track" id="term-track"></div>
+    </div>
+
+    <div class="relative z-[2] max-w-[1400px] mx-auto px-6 md:px-10 w-full pt-32 pb-24">
+      <!-- 1. status -->
+      <div class="flex items-center gap-3 mb-10 reveal">
+        <span class="pulse-dot"></span>
+        <span class="font-mono text-[11px] text-warm tracking-[0.22em] uppercase">Disponível para novos projetos · Brasil &amp; internacional</span>
+      </div>
+
+      <!-- 2. H1 -->
+      <h1 class="font-display text-cream font-medium leading-[1.02] text-[clamp(2.4rem,7.5vw,6.5rem)] reveal">
+        <span class="block">Sites que vendem</span>
+        <span class="block">
+          <span class="text-cream/60 font-light">para</span>
+          <span id="rotate" class="rotate-wrap" aria-live="polite"><span class="rotate-word" id="rotate-word"></span></span>
+        </span>
+      </h1>
+
+      <!-- 3. subtitle -->
+      <p class="mt-7 max-w-xl text-cream/70 text-[clamp(1rem,1.3vw,1.15rem)] leading-[1.55] font-light reveal">
+        Desenvolvimento web sob medida para profissionais que recusam o genérico.
+      </p>
+
+      <!-- 4. CTAs -->
+      <div class="mt-12 flex flex-wrap items-center gap-4 reveal">
+        <a href="#contato" class="btn-gold px-7 py-4 text-[11px] tracking-[0.18em] uppercase font-mono inline-flex items-center gap-3">
+          Iniciar projeto
+          <svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" fill="none" stroke-width="1.5"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
+        </a>
+        <a href="#projetos" class="btn-outline px-7 py-4 text-[11px] tracking-[0.18em] uppercase font-mono">
+          Ver trabalhos
+        </a>
+      </div>
+    </div>
+
+    <!-- 5. scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 scroll-arrow">
+      <span class="font-mono text-[10px] text-warm tracking-[0.3em] uppercase">Scroll</span>
+      <svg width="12" height="18" viewBox="0 0 14 20" stroke="currentColor" fill="none" class="text-cream/40">
+        <path d="M7 0v18M1 12l6 6 6-6" stroke-width="1"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ============== STACK MARQUEE ============== -->
+  <section class="border-y border-line py-7 overflow-hidden reveal">
+    <div class="marquee">
+      <div class="marquee-track">
+        <span class="marquee-item">Next.js</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">TypeScript</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">Tailwind CSS</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">Framer Motion</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">GSAP</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">Three.js</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">Vercel</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">Sanity</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">React</span>
+        <span class="marquee-dot">◆</span>
+      </div>
+      <div class="marquee-track" aria-hidden="true">
+        <span class="marquee-item">Next.js</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">TypeScript</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">Tailwind CSS</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">Framer Motion</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">GSAP</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">Three.js</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">Vercel</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">Sanity</span>
+        <span class="marquee-dot">◆</span>
+        <span class="marquee-item">React</span>
+        <span class="marquee-dot">◆</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== SERVICES ============== -->
+  <section id="servicos" class="relative py-24 md:py-36">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
+        <div class="reveal">
+          <div class="section-eyebrow mb-5">/ serviços</div>
+          <h2 class="text-cream text-[clamp(2.4rem,5vw,4.5rem)] leading-[1]">
+            O que construímos
+          </h2>
+        </div>
+        <p class="text-warm max-w-md text-[15px] leading-[1.65] font-light reveal">
+          Três frentes. Um padrão único de execução.
+          Selecione a frente que mais combina com o seu momento — ou conversaremos para definir.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_minmax(360px,42%)] gap-10 md:gap-16 items-start">
+        <!-- list -->
+        <div id="svc-list">
+          <div class="svc-row active py-7 md:py-10 cursor-pointer" data-svc="0">
+            <div class="svc-no mb-4">SERVIÇO / 01</div>
+            <div class="svc-title text-[clamp(2rem,5vw,4rem)]">CONSTRUÇÃO DE SITES</div>
+            <p class="svc-desc text-[15px] leading-[1.6] max-w-md font-light">
+              Sites institucionais e portfólios construídos do zero. Performance, design e SEO desde a primeira linha de código.
+            </p>
+          </div>
+          <div class="svc-row py-7 md:py-10 cursor-pointer" data-svc="1">
+            <div class="svc-no mb-4">SERVIÇO / 02</div>
+            <div class="svc-title text-[clamp(2rem,5vw,4rem)]">LANDING PAGES</div>
+            <p class="svc-desc text-[15px] leading-[1.6] max-w-md font-light">
+              Páginas de conversão calibradas para campanhas, lançamentos e captação de leads qualificados.
+            </p>
+          </div>
+          <div class="svc-row py-7 md:py-10 cursor-pointer" data-svc="2">
+            <div class="svc-no mb-4">SERVIÇO / 03</div>
+            <div class="svc-title text-[clamp(2rem,5vw,4rem)]">REBRANDING DIGITAL</div>
+            <p class="svc-desc text-[15px] leading-[1.6] max-w-md font-light">
+              Transformamos sites desatualizados em ativos digitais à altura da sua marca atual. Mais rápido, mais bonito, mais lucrativo.
+            </p>
+          </div>
+        </div>
+
+        <!-- preview pane -->
+        <div class="hidden md:block sticky top-28 aspect-[4/5] relative rounded-md overflow-hidden border border-line bg-ink2">
+          <div id="svc-img-0" class="svc-image active"></div>
+          <div id="svc-img-1" class="svc-image"></div>
+          <div id="svc-img-2" class="svc-image"></div>
+
+          <span class="absolute top-3 left-3 w-3 h-3 border-t border-l border-gold/50"></span>
+          <span class="absolute top-3 right-3 w-3 h-3 border-t border-r border-gold/50"></span>
+          <span class="absolute bottom-3 left-3 w-3 h-3 border-b border-l border-gold/50"></span>
+          <span class="absolute bottom-3 right-3 w-3 h-3 border-b border-r border-gold/50"></span>
+
+          <div class="absolute bottom-5 left-5 right-5 flex items-end justify-between font-mono text-[10px] tracking-[0.2em] uppercase text-cream/70">
+            <span id="svc-caption">Clinica Essência — Construção</span>
+            <span class="text-gold"><span id="svc-num">01</span> / 03</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== PROCESS ============== -->
+  <section id="processo" class="relative py-24 md:py-36">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-24">
+        <div class="reveal">
+          <div class="section-eyebrow mb-5">/ processo</div>
+          <h2 class="text-cream text-[clamp(2.4rem,5vw,4.5rem)] leading-[1]">
+            Como trabalhamos
+          </h2>
+        </div>
+        <p class="text-warm max-w-md text-[15px] leading-[1.65] font-light reveal">
+          Quatro etapas. Auto-rotação a cada cinco segundos —
+          ou clique em qualquer uma para fixar.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-[36%_1fr] gap-8 md:gap-14">
+        <!-- tabs -->
+        <div class="flex md:flex-col gap-6 md:gap-9 overflow-x-auto md:overflow-visible pb-2 md:pb-0">
+          <button class="process-tab active text-left flex-shrink-0" data-step="0">
+            <div class="process-tab-num mb-2">ETAPA · 01</div>
+            <div class="font-display text-2xl md:text-3xl font-medium">Diagnóstico</div>
+          </button>
+          <button class="process-tab text-left flex-shrink-0" data-step="1">
+            <div class="process-tab-num mb-2">ETAPA · 02</div>
+            <div class="font-display text-2xl md:text-3xl font-medium">Design</div>
+          </button>
+          <button class="process-tab text-left flex-shrink-0" data-step="2">
+            <div class="process-tab-num mb-2">ETAPA · 03</div>
+            <div class="font-display text-2xl md:text-3xl font-medium">Desenvolvimento</div>
+          </button>
+          <button class="process-tab text-left flex-shrink-0" data-step="3">
+            <div class="process-tab-num mb-2">ETAPA · 04</div>
+            <div class="font-display text-2xl md:text-3xl font-medium">Entrega &amp; Suporte</div>
+          </button>
+        </div>
+
+        <!-- card -->
+        <div class="relative">
+          <div class="border border-line bg-ink2 rounded-md p-8 md:p-12 min-h-[400px] relative overflow-hidden">
+
+            <!-- step 0 -->
+            <div class="process-card" data-step="0">
+              <div class="process-step-num text-[6rem] mb-6">01</div>
+              <h3 class="text-cream text-3xl md:text-4xl mb-5">Diagnóstico</h3>
+              <p class="text-warm max-w-lg leading-[1.7] font-light">
+                Análise da sua marca, mercado e concorrência. Definimos juntos o que faz seu site vender.
+                Workshops, reuniões e leitura técnica do que existe hoje.
+              </p>
+              <ul class="mt-10 grid grid-cols-2 gap-3 font-mono text-[12px] text-cream/70 max-w-md tracking-wide">
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> Brand audit</li>
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> Benchmark</li>
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> KPIs</li>
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> Arquitetura</li>
+              </ul>
+            </div>
+            <!-- step 1 -->
+            <div class="process-card hidden" data-step="1">
+              <div class="process-step-num text-[6rem] mb-6">02</div>
+              <h3 class="text-cream text-3xl md:text-4xl mb-5">Design</h3>
+              <p class="text-warm max-w-lg leading-[1.7] font-light">
+                Direção visual exclusiva. Nada de templates. Cada projeto recebe uma identidade pensada do zero,
+                validada em wireframes e levada à exaustão até atingir o tom certo.
+              </p>
+              <ul class="mt-10 grid grid-cols-2 gap-3 font-mono text-[12px] text-cream/70 max-w-md tracking-wide">
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> Moodboard</li>
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> Wireframe</li>
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> Design system</li>
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> Prototipagem</li>
+              </ul>
+            </div>
+            <!-- step 2 -->
+            <div class="process-card hidden" data-step="2">
+              <div class="process-step-num text-[6rem] mb-6">03</div>
+              <h3 class="text-cream text-3xl md:text-4xl mb-5">Desenvolvimento</h3>
+              <p class="text-warm max-w-lg leading-[1.7] font-light">
+                Código limpo, performance obsessiva, responsividade impecável.
+                Stack moderna: Next.js, Tailwind, Framer Motion. Versionamento e revisões a cada sprint.
+              </p>
+              <ul class="mt-10 grid grid-cols-2 gap-3 font-mono text-[12px] text-cream/70 max-w-md tracking-wide">
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> Next.js + TS</li>
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> Animações</li>
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> Acessibilidade</li>
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> SEO técnico</li>
+              </ul>
+            </div>
+            <!-- step 3 -->
+            <div class="process-card hidden" data-step="3">
+              <div class="process-step-num text-[6rem] mb-6">04</div>
+              <h3 class="text-cream text-3xl md:text-4xl mb-5">Entrega &amp; Suporte</h3>
+              <p class="text-warm max-w-lg leading-[1.7] font-light">
+                Deploy, domínio, monitoramento e analytics configurados.
+                E continuamos disponíveis após o lançamento — porque um site vive, evolui e cresce.
+              </p>
+              <ul class="mt-10 grid grid-cols-2 gap-3 font-mono text-[12px] text-cream/70 max-w-md tracking-wide">
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> Deploy Vercel</li>
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> SEO setup</li>
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> Analytics</li>
+                <li class="flex items-center gap-2"><span class="text-warm">—</span> Suporte 30d</li>
+              </ul>
+            </div>
+
+          </div>
+
+          <!-- progress bar -->
+          <div class="process-bar mt-6">
+            <div id="process-bar-fill" class="process-bar-fill"></div>
+          </div>
+          <div class="flex justify-between mt-3 font-mono text-[10px] tracking-[0.22em] uppercase text-warm">
+            <span><span id="process-current">01</span> / 04</span>
+            <span>Auto · 5s</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== PROJECTS / SHOWCASE ============== -->
+  <section id="projetos" class="relative py-24 md:py-32 overflow-hidden">
+
+    <div id="projects-carousel" class="relative">
+
+      <div class="max-w-[1400px] mx-auto w-full px-6 md:px-10 pb-8">
+        <div class="flex items-end justify-between">
+          <div>
+            <div class="section-eyebrow mb-3">/ trabalhos selecionados</div>
+            <div class="font-mono text-cream/40 text-[10px] tracking-[0.28em] uppercase">2024 — 2026</div>
+          </div>
+          <div class="font-mono text-[10px] tracking-[0.22em] uppercase text-warm hidden md:block">
+            <span id="proj-index">01</span> / 05
+          </div>
+        </div>
+      </div>
+
+      <!-- giant decorative headline (drifts subtly with active index) -->
+      <div class="absolute inset-0 pointer-events-none flex items-center justify-between px-6 md:px-10 z-[1]">
+        <div id="scrub-left" class="scrub-word text-cream/[0.04] text-[clamp(5rem,16vw,15rem)] leading-none whitespace-nowrap" style="transition: transform 900ms var(--easeOutExpo);">
+          FEITO
+        </div>
+        <div id="scrub-right" class="scrub-word text-cream/[0.04] text-[clamp(5rem,16vw,15rem)] leading-none whitespace-nowrap text-right" style="transition: transform 900ms var(--easeOutExpo);">
+          VENDER
+        </div>
+      </div>
+
+      <!-- stage with projects -->
+      <div class="relative flex items-center justify-center z-[2] min-h-[60vh] md:min-h-[68vh] py-4">
+        <div id="project-stage" class="project-stage relative w-full" style="min-height: clamp(360px, 56vw, 720px);">
+
+            <!-- Project 1: Essênci.a -->
+            <div class="project-card active" data-i="0">
+              <div class="mock-browser w-[88%] md:w-[78%] max-w-[1100px] aspect-[16/10] shadow-2xl shadow-black/60">
+                <div class="mock-bar">
+                  <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+                  <div class="ml-4 mock-url">odontologiaessencia.ia.br</div>
+                </div>
+                <div class="relative h-[calc(100%-36px)] bg-[#0c0a07] overflow-hidden">
+                  <!-- Live iframe of the real site, scaled down -->
+                  <div class="live-iframe-wrap">
+                    <iframe
+                      src="https://odontologiaessencia.ia.br/"
+                      title="odontologiaessencia.ia.br"
+                      loading="lazy"
+                      referrerpolicy="no-referrer"
+                      sandbox="allow-scripts allow-same-origin allow-popups"
+                      class="live-iframe"
+                      onload="this.parentElement.classList.add('loaded')"
+                    ></iframe>
+                    <!-- Fallback that shows under iframe (and stays visible if iframe is blocked) -->
+                    <div class="live-iframe-fallback absolute inset-0 flex">
+                      <div class="w-1/2 p-6 md:p-12 flex flex-col justify-center">
+                        <div class="font-mono text-[10px] text-gold tracking-[0.3em] uppercase mb-4">Odontologia Estética</div>
+                        <div class="font-display font-medium text-cream text-[clamp(1.5rem,3.2vw,3rem)] leading-[1.05]">
+                          Sorrisos construídos com método.
+                        </div>
+                        <div class="mt-5 text-warm text-[11px] md:text-[13px] max-w-[80%] leading-relaxed font-light">
+                          Clínica boutique em Pinheiros, especializada em harmonização e implantes.
+                        </div>
+                        <div class="mt-6 inline-block w-fit border border-cream/30 text-cream text-[10px] px-4 py-2 tracking-[0.22em] uppercase font-mono">
+                          Agendar consulta
+                        </div>
+                      </div>
+                      <div class="w-1/2 relative">
+                        <div class="absolute inset-4 md:inset-8 bg-gradient-to-br from-[#2a1f14] to-[#0f0a06] rounded-sm overflow-hidden border border-line"></div>
+                      </div>
+                    </div>
+                    <!-- Click overlay: opens real site in new tab (and keeps iframe non-interactive so scroll/scrub works) -->
+                    <a href="https://odontologiaessencia.ia.br/" target="_blank" rel="noopener" class="absolute inset-0 z-[3]" aria-label="Abrir odontologiaessencia.ia.br"></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 2: Máxxima -->
+            <div class="project-card" data-i="1">
+              <div class="mock-browser w-[88%] md:w-[78%] max-w-[1100px] aspect-[16/10] shadow-2xl shadow-black/60">
+                <div class="mock-bar">
+                  <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+                  <div class="ml-4 mock-url">maxxima-ortopedia.com.br</div>
+                </div>
+                <div class="relative h-[calc(100%-36px)] bg-[#0d0d0d] overflow-hidden">
+                  <div class="absolute inset-0 grid grid-cols-12 grid-rows-6 gap-2 p-4 md:p-8">
+                    <div class="col-span-7 row-span-3 bg-[#141414] border border-line rounded-sm p-6 flex flex-col justify-end">
+                      <div class="font-mono text-[10px] text-gold tracking-[0.3em] uppercase">Clínica Máxxima</div>
+                      <div class="font-display font-medium text-cream text-[clamp(1.4rem,3vw,2.6rem)] leading-[1.05] mt-2">
+                        Ortopedia de precisão
+                      </div>
+                    </div>
+                    <div class="col-span-5 row-span-3 border border-line rounded-sm p-5 flex flex-col justify-between">
+                      <div class="font-mono text-[10px] text-warm tracking-[0.3em] uppercase">Equipe</div>
+                      <div>
+                        <div class="metric-num text-3xl">12</div>
+                        <div class="font-mono text-[10px] text-warm uppercase tracking-wider mt-1">Especialistas</div>
+                      </div>
+                    </div>
+                    <div class="col-span-4 row-span-3 bg-[#141414] rounded-sm border border-line"></div>
+                    <div class="col-span-4 row-span-3 bg-[#141414] rounded-sm border border-line"></div>
+                    <div class="col-span-4 row-span-3 bg-[#141414] rounded-sm border border-line flex items-center justify-center">
+                      <div class="text-cream font-mono text-[10px] tracking-[0.3em] uppercase">+ Agendar</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 3: AURA -->
+            <div class="project-card" data-i="2">
+              <div class="mock-browser w-[88%] md:w-[78%] max-w-[1100px] aspect-[16/10] shadow-2xl shadow-black/60">
+                <div class="mock-bar">
+                  <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+                  <div class="ml-4 mock-url">aura.law</div>
+                </div>
+                <div class="relative h-[calc(100%-36px)] bg-[#0a0a0a] overflow-hidden">
+                  <div class="absolute inset-0 flex items-center justify-center p-8">
+                    <div class="text-center">
+                      <div class="font-mono text-[10px] text-gold tracking-[0.4em] uppercase mb-6">Aura · Advocacia Empresarial</div>
+                      <div class="font-display font-medium text-cream text-[clamp(2rem,4.4vw,4.4rem)] leading-[1] uppercase">
+                        Estratégia<br/>jurídica<br/>para quem<br/>decide.
+                      </div>
+                      <div class="mt-8 flex items-center justify-center gap-8 font-mono text-[10px] text-warm tracking-[0.3em] uppercase">
+                        <span>Tributário</span>
+                        <span class="text-gold">·</span>
+                        <span>Contratual</span>
+                        <span class="text-gold">·</span>
+                        <span>Empresarial</span>
+                      </div>
+                    </div>
+                  </div>
+                  <span class="absolute top-4 left-4 w-4 h-4 border-t border-l border-cream/30"></span>
+                  <span class="absolute top-4 right-4 w-4 h-4 border-t border-r border-cream/30"></span>
+                  <span class="absolute bottom-4 left-4 w-4 h-4 border-b border-l border-cream/30"></span>
+                  <span class="absolute bottom-4 right-4 w-4 h-4 border-b border-r border-cream/30"></span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 4: VÉRTICE -->
+            <div class="project-card" data-i="3">
+              <div class="mock-browser w-[88%] md:w-[78%] max-w-[1100px] aspect-[16/10] shadow-2xl shadow-black/60">
+                <div class="mock-bar">
+                  <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+                  <div class="ml-4 mock-url">vertice.imb.br</div>
+                </div>
+                <div class="relative h-[calc(100%-36px)] bg-[#0a0a0a] overflow-hidden">
+                  <div class="absolute inset-0 grid grid-cols-3 gap-3 p-5 md:p-8">
+                    <div class="col-span-2 bg-[#141414] border border-line rounded-sm relative overflow-hidden">
+                      <div class="absolute bottom-4 left-4 right-4">
+                        <div class="font-mono text-[10px] text-gold tracking-[0.3em] uppercase">Vértice · Real Estate</div>
+                        <div class="font-display font-medium text-cream text-[clamp(1.2rem,2.5vw,2.4rem)] leading-[1.05] mt-1">
+                          Coberturas em Jardins
+                        </div>
+                      </div>
+                      <div class="absolute top-4 right-4 font-mono text-[10px] text-warm tracking-wider">R$ 18M+</div>
+                    </div>
+                    <div class="grid grid-rows-2 gap-3">
+                      <div class="bg-[#141414] rounded-sm border border-line p-3 flex flex-col justify-between">
+                        <div class="font-mono text-[9px] text-warm tracking-[0.25em] uppercase">Área</div>
+                        <div class="metric-num text-xl">540m²</div>
+                      </div>
+                      <div class="bg-[#141414] rounded-sm border border-line p-3 flex flex-col justify-between">
+                        <div class="font-mono text-[9px] text-warm tracking-[0.25em] uppercase">Suítes</div>
+                        <div class="metric-num text-xl">04</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Project 5: TRADE TIRES -->
+            <div class="project-card" data-i="4">
+              <div class="mock-browser w-[88%] md:w-[78%] max-w-[1100px] aspect-[16/10] shadow-2xl shadow-black/60">
+                <div class="mock-bar">
+                  <span class="mock-dot"></span><span class="mock-dot"></span><span class="mock-dot"></span>
+                  <div class="ml-4 mock-url">tradetires.com.br</div>
+                </div>
+                <div class="relative h-[calc(100%-36px)] bg-[#0c0a07] overflow-hidden">
+                  <div class="live-iframe-wrap">
+                    <iframe
+                      src="https://www.tradetires.com.br/"
+                      title="tradetires.com.br"
+                      loading="lazy"
+                      referrerpolicy="no-referrer"
+                      sandbox="allow-scripts allow-same-origin allow-popups"
+                      class="live-iframe"
+                      onload="this.parentElement.classList.add('loaded')"
+                    ></iframe>
+                    <!-- Fallback that shows under iframe (and stays visible if iframe is blocked) -->
+                    <div class="live-iframe-fallback absolute inset-0 flex">
+                      <div class="w-1/2 p-6 md:p-12 flex flex-col justify-center">
+                        <div class="font-mono text-[10px] text-gold tracking-[0.3em] uppercase mb-4">4×4 · Off-Road</div>
+                        <div class="font-display font-medium text-cream text-[clamp(1.5rem,3.2vw,3rem)] leading-[1.05] uppercase">
+                          Trade Tires.
+                        </div>
+                        <div class="mt-5 text-warm text-[11px] md:text-[13px] max-w-[80%] leading-relaxed font-light">
+                          Pneus, rodas, suspensão e acessórios para caminhonetes, SUVs e veículos off-road.
+                        </div>
+                        <div class="mt-6 inline-block w-fit border border-cream/30 text-cream text-[10px] px-4 py-2 tracking-[0.22em] uppercase font-mono">
+                          Ver catálogo
+                        </div>
+                      </div>
+                      <div class="w-1/2 relative">
+                        <div class="absolute inset-4 md:inset-8 bg-gradient-to-br from-[#1a1208] to-[#0a0705] rounded-sm overflow-hidden border border-line"></div>
+                      </div>
+                    </div>
+                    <a href="https://www.tradetires.com.br/" target="_blank" rel="noopener" class="absolute inset-0 z-[3]" aria-label="Abrir tradetires.com.br"></a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+      <!-- carousel controls -->
+      <div class="max-w-[1400px] mx-auto w-full px-6 md:px-10 mt-8 md:mt-10 relative z-[3]">
+        <div class="flex items-center justify-between gap-6">
+          <!-- prev / next -->
+          <div class="flex items-center gap-3">
+            <button id="proj-prev" type="button" aria-label="Projeto anterior"
+              class="w-11 h-11 md:w-12 md:h-12 rounded-full border border-line text-cream/70 hover:text-cream hover:border-cream/40 transition flex items-center justify-center group">
+              <svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" fill="none" stroke-width="1.4">
+                <path d="M13 7H1M6 2L1 7l5 5"/>
+              </svg>
+            </button>
+            <button id="proj-next" type="button" aria-label="Próximo projeto"
+              class="w-11 h-11 md:w-12 md:h-12 rounded-full border border-line text-cream/70 hover:text-cream hover:border-cream/40 transition flex items-center justify-center group">
+              <svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" fill="none" stroke-width="1.4">
+                <path d="M1 7h12M8 2l5 5-5 5"/>
+              </svg>
+            </button>
+          </div>
+
+          <!-- dots -->
+          <div id="proj-dots" class="flex items-center gap-2" role="tablist" aria-label="Seleção de projetos"></div>
+
+          <!-- autoplay status / pause toggle -->
+          <button id="proj-autoplay" type="button"
+            class="hidden md:inline-flex items-center gap-2.5 font-mono text-[10px] tracking-[0.22em] uppercase text-warm hover:text-cream transition"
+            aria-label="Pausar autoplay">
+            <span id="proj-autoplay-dot" class="w-1.5 h-1.5 rounded-full bg-gold"></span>
+            <span id="proj-autoplay-label">Auto · 6s</span>
+          </button>
+        </div>
+
+        <!-- progress bar -->
+        <div class="mt-5 process-bar">
+          <div id="proj-progress" class="process-bar-fill"></div>
+        </div>
+      </div>
+
+      <!-- meta strip -->
+      <div class="max-w-[1400px] mx-auto w-full px-6 md:px-10 mt-10 md:mt-12">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10 border-t border-line pt-6">
+          <div>
+            <div class="mono-label mb-1">Cliente</div>
+            <div class="text-cream text-[15px] font-display font-medium" id="meta-client">Clinica Essência</div>
+          </div>
+          <div>
+            <div class="mono-label mb-1">Categoria</div>
+            <div class="text-cream text-[15px] font-display font-medium" id="meta-cat">Odontologia Estética</div>
+          </div>
+          <div>
+            <div class="mono-label mb-1">Stack</div>
+            <div class="text-cream text-[15px] font-display font-medium" id="meta-stack">Next.js · Sanity · GSAP</div>
+          </div>
+          <div>
+            <div class="mono-label mb-1">Link</div>
+            <a href="https://odontologiaessencia.ia.br/" target="_blank" rel="noopener" class="text-cream text-[15px] font-display font-medium inline-flex items-center gap-2 hover:text-gold transition" id="meta-link">
+              Ver projeto
+              <svg width="12" height="12" viewBox="0 0 12 12" stroke="currentColor" fill="none"><path d="M3 9l6-6M5 3h4v4"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============== SOBRE ============== -->
+  <section id="sobre" class="py-24 md:py-36 relative">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-10 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+
+      <div class="reveal">
+        <div class="section-eyebrow mb-5">/ sobre</div>
+        <h2 class="text-cream text-[clamp(2.2rem,4.5vw,4rem)] leading-[1.02] mb-8">
+          Um estúdio.<br/>
+          Um padrão.<br/>
+          Um compromisso.
+        </h2>
+        <p class="text-warm text-[16px] leading-[1.75] max-w-lg mb-6 font-light">
+          FRD é o estúdio de desenvolvimento web de Felipe Réssio.
+          Construo sites sob medida com Next.js, Tailwind e Framer Motion.
+          Sem templates, sem WordPress, sem atalhos.
+        </p>
+        <p class="text-warm text-[16px] leading-[1.75] max-w-lg font-light">
+          Cada projeto começa do zero e termina com performance, design e SEO calibrados para conversão.
+          Operação enxuta — poucos clientes por trimestre, dedicação total.
+        </p>
+
+        <div class="mt-12 flex flex-wrap gap-4 max-w-md">
+          <div class="font-mono text-[11px] text-cream/70 tracking-wider border border-line px-3 py-1.5 rounded">São Paulo · BR</div>
+          <div class="font-mono text-[11px] text-cream/70 tracking-wider border border-line px-3 py-1.5 rounded">Remoto</div>
+          <div class="font-mono text-[11px] text-cream/70 tracking-wider border border-line px-3 py-1.5 rounded">PT · EN</div>
+        </div>
+      </div>
+
+      <div class="relative">
+        <div class="aspect-[4/5] bg-ink2 border border-line rounded-md overflow-hidden relative">
+          <div class="absolute inset-0 bg-gradient-to-b from-[#1a140e] via-[#100b07] to-[#080604]"></div>
+          <svg class="absolute inset-0 w-full h-full opacity-60" viewBox="0 0 400 500" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <radialGradient id="halo" cx="50%" cy="35%" r="40%">
+                <stop offset="0%" stop-color="#D4A86A" stop-opacity="0.15"/>
+                <stop offset="100%" stop-color="#D4A86A" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="400" height="500" fill="url(#halo)"/>
+            <ellipse cx="200" cy="200" rx="55" ry="65" fill="rgba(212,168,106,0.1)"/>
+            <path d="M120 500 C 120 360 145 290 200 290 C 255 290 280 360 280 500 Z" fill="rgba(212,168,106,0.07)"/>
+          </svg>
+
+          <div class="absolute bottom-6 left-6 right-6">
+            <div class="font-mono text-[10px] text-gold tracking-[0.3em] uppercase">Founder</div>
+            <div class="font-display font-medium text-cream text-3xl mt-2">Felipe Réssio</div>
+            <div class="text-warm text-[13px] mt-1 font-light">Designer &amp; Desenvolvedor</div>
+          </div>
+
+          <span class="absolute top-4 left-4 w-3 h-3 border-t border-l border-cream/30"></span>
+          <span class="absolute top-4 right-4 w-3 h-3 border-t border-r border-cream/30"></span>
+        </div>
+
+        <div class="hidden md:block absolute -bottom-8 -left-8 bg-ink2 border border-line p-6 max-w-[260px] rounded-md">
+          <div class="font-display text-gold text-5xl font-bold leading-[0.4] mb-4">"</div>
+          <p class="font-display font-medium text-cream text-[15px] leading-[1.45]">
+            Um site não é um produto. É a primeira conversa.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============== METRICS ============== -->
+  <section class="py-20 md:py-28 bg-ink2 border-y border-line relative">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-12 reveal">
+        <div class="md:border-r md:border-line md:pr-6">
+          <div class="metric-num text-[clamp(2.8rem,5vw,4.6rem)]">12<span class="text-gold/60">+</span></div>
+          <div class="mono-label mt-3">Projetos entregues</div>
+        </div>
+        <div class="md:border-r md:border-line md:pr-6">
+          <div class="metric-num text-[clamp(2.8rem,5vw,4.6rem)]">06</div>
+          <div class="mono-label mt-3">Setores atendidos</div>
+        </div>
+        <div class="md:border-r md:border-line md:pr-6">
+          <div class="metric-num text-[clamp(2.8rem,5vw,4.6rem)]">100<span class="text-gold/60">%</span></div>
+          <div class="mono-label mt-3">Mobile-first</div>
+        </div>
+        <div>
+          <div class="metric-num text-[clamp(2.8rem,5vw,4.6rem)]">&lt;1s</div>
+          <div class="mono-label mt-3">Carregamento médio</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== TESTIMONIALS ============== -->
+  <section id="depoimentos" class="py-24 md:py-36 relative overflow-hidden">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-8 mb-16 md:mb-20">
+        <div class="reveal">
+          <div class="section-eyebrow mb-5">/ o que dizem</div>
+          <h2 class="text-cream text-[clamp(2.4rem,5vw,4.5rem)] leading-[1]">
+            Clientes que confiaram
+          </h2>
+        </div>
+        <div class="flex items-center gap-3 reveal">
+          <button id="t-prev" class="w-11 h-11 border border-line rounded-full flex items-center justify-center text-cream/70 hover:text-cream hover:border-cream/30 transition" aria-label="Anterior">
+            <svg width="13" height="13" viewBox="0 0 14 14" stroke="currentColor" fill="none" stroke-width="1.4"><path d="M9 1L3 7l6 6"/></svg>
+          </button>
+          <button id="t-next" class="w-11 h-11 border border-line rounded-full flex items-center justify-center text-cream/70 hover:text-cream hover:border-cream/30 transition" aria-label="Próximo">
+            <svg width="13" height="13" viewBox="0 0 14 14" stroke="currentColor" fill="none" stroke-width="1.4"><path d="M5 1l6 6-6 6"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <div id="testimonials" class="relative h-[460px] md:h-[440px]"></div>
+
+      <div class="mt-10 flex justify-center gap-2" id="t-dots"></div>
+    </div>
+  </section>
+
+  <!-- ============== CTA / CONTACT ============== -->
+  <section id="contato" class="relative py-24 md:py-36 overflow-hidden">
+
+    <!-- single subtle circuit detail, top-right -->
+    <svg class="absolute top-0 right-0 w-[400px] h-[400px] pointer-events-none opacity-40" viewBox="0 0 400 400" aria-hidden="true">
+      <g class="cta-circuit" stroke="#D4A86A" stroke-width="0.8" fill="none">
+        <path d="M400 30 L 280 30 L 240 70 L 80 70 L 40 110 L 0 110" stroke-dasharray="1000" stroke-dashoffset="1000"/>
+        <path d="M400 160 L 320 160 L 280 200 L 200 200" stroke-dasharray="1000" stroke-dashoffset="1000"/>
+      </g>
+      <g fill="#D4A86A">
+        <circle cx="240" cy="70" r="2.5"/>
+        <circle cx="280" cy="200" r="2.5"/>
+      </g>
+    </svg>
+
+    <div class="relative max-w-[1400px] mx-auto px-6 md:px-10">
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_1fr] gap-14 md:gap-24 items-start">
+
+        <div class="reveal">
+          <div class="section-eyebrow mb-5">/ contato</div>
+          <h2 class="text-cream text-[clamp(2.6rem,6vw,6rem)] leading-[1] mb-8">
+            Vamos construir o próximo.
+          </h2>
+          <p class="text-warm text-[16px] leading-[1.7] max-w-md font-light">
+            Resposta em até 24h. Orçamento sem compromisso.
+          </p>
+
+          <div class="mt-12 space-y-5 border-t border-line pt-8 max-w-md">
+            <div class="flex items-center gap-4">
+              <svg width="18" height="18" viewBox="0 0 24 24" stroke="#8A8275" fill="none" stroke-width="1.4"><path d="M3 5v14a2 2 0 002 2h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2zM3 7l9 6 9-6"/></svg>
+              <div>
+                <div class="mono-label">Email</div>
+                <a href="mailto:contato@frd.dev" class="text-cream text-[15px] hover:text-gold transition">contato@frd.dev</a>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <svg width="18" height="18" viewBox="0 0 24 24" stroke="#8A8275" fill="none" stroke-width="1.4"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+              <div>
+                <div class="mono-label">WhatsApp</div>
+                <a href="https://wa.me/5511000000000?text=Olá%20Felipe,%20vim%20do%20site%20FRD" target="_blank" rel="noopener" class="text-cream text-[15px] hover:text-gold transition">+55 11 9 0000-0000</a>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <svg width="18" height="18" viewBox="0 0 24 24" stroke="#8A8275" fill="none" stroke-width="1.4"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              <div>
+                <div class="mono-label">Localização</div>
+                <div class="text-cream text-[15px]">São Paulo, SP · Brasil</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <form id="contact-form" class="space-y-6 reveal">
+            <div>
+              <label class="field-label" for="f-name">Nome</label>
+              <input id="f-name" type="text" class="field" data-i18n-placeholder="Como devemos chamar você?" placeholder="Como devemos chamar você?" required />
+            </div>
+            <div>
+              <label class="field-label" for="f-company">Empresa / Profissão</label>
+              <input id="f-company" type="text" class="field" data-i18n-placeholder="Clínica, escritório, marca..." placeholder="Clínica, escritório, marca..." />
+            </div>
+            <div>
+              <label class="field-label" for="f-wa">WhatsApp</label>
+              <input id="f-wa" type="tel" class="field" placeholder="+55 (11) 9 0000-0000" required />
+            </div>
+            <div>
+              <label class="field-label" for="f-type">Tipo de projeto</label>
+              <select id="f-type" class="field" required>
+                <option value="" data-i18n-opt="Selecione...">Selecione...</option>
+                <option data-i18n-opt="Site novo">Site novo</option>
+                <option data-i18n-opt="Landing page">Landing page</option>
+                <option data-i18n-opt="Rebranding">Rebranding</option>
+                <option data-i18n-opt="Outro">Outro</option>
+              </select>
+            </div>
+            <div>
+              <label class="field-label" for="f-msg">Mensagem</label>
+              <textarea id="f-msg" rows="3" class="field resize-none" data-i18n-placeholder="Conte um pouco sobre o seu projeto..." placeholder="Conte um pouco sobre o seu projeto..."></textarea>
+            </div>
+
+            <div class="pt-4">
+              <button type="submit" class="btn-gold px-8 py-4 text-[11px] tracking-[0.18em] uppercase font-mono inline-flex items-center justify-center gap-3 w-full sm:w-auto">
+                <span>Enviar mensagem</span>
+                <svg width="14" height="14" viewBox="0 0 14 14" stroke="currentColor" fill="none" stroke-width="1.5"><path d="M1 7h12M8 2l5 5-5 5"/></svg>
+              </button>
+            </div>
+
+            <div id="form-feedback" class="font-mono text-[12px] hidden"></div>
+          </form>
+
+          <!-- WhatsApp highlight block -->
+          <div class="mt-10 border border-line rounded-md p-6 flex items-center justify-between gap-5 bg-ink2/60 reveal">
+            <div>
+              <div class="mono-label" style="color: var(--avail);">Resposta imediata</div>
+              <div class="text-cream font-display font-medium text-lg mt-1">Prefere conversar agora?</div>
+            </div>
+            <a href="https://wa.me/5511000000000?text=Olá%20Felipe,%20vim%20do%20site%20FRD" target="_blank" rel="noopener" class="flex-shrink-0 inline-flex items-center gap-2 font-mono text-[11px] tracking-[0.16em] uppercase px-5 py-3 rounded-md transition" style="background: #5BA770; color: #0a0a0a;">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5-.2 0-.4 0-.6 0-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2 .8 2.7.9 3.7.7.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.5.8 3.2 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2z"/></svg>
+              WhatsApp →
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============== FOOTER ============== -->
+  <footer class="border-t border-line py-14 relative">
+    <div class="max-w-[1400px] mx-auto px-6 md:px-10">
+      <div class="grid grid-cols-1 md:grid-cols-[1fr_2fr_1fr] gap-10 mb-14">
+
+        <div>
+          <a href="#top" class="flex items-start gap-4 group" id="footer-logo" aria-label="FRD — topo">
+            <img src="FRD_logo_cream.png" alt="FRD — Felipe Réssio Development" class="h-12 w-auto select-none transition-transform duration-700" id="footer-logo-img" draggable="false" style="filter: drop-shadow(0 0 0 transparent);" />
+          </a>
+          <div class="mono-label mt-3">Felipe Réssio Development</div>
+          <p class="text-warm text-[13px] mt-5 max-w-[280px] leading-[1.6] font-light">
+            Desenvolvimento web premium · São Paulo, Brasil. Operação enxuta, padrão obsessivo.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-2 gap-6">
+          <div>
+            <div class="mono-label mb-4">Navegar</div>
+            <ul class="space-y-2.5 text-[14px]">
+              <li><a href="#servicos" class="text-cream/80 hover:text-cream transition">Serviços</a></li>
+              <li><a href="#processo" class="text-cream/80 hover:text-cream transition">Processo</a></li>
+              <li><a href="#projetos" class="text-cream/80 hover:text-cream transition">Projetos</a></li>
+              <li><a href="#sobre" class="text-cream/80 hover:text-cream transition">Sobre</a></li>
+              <li><a href="#contato" class="text-cream/80 hover:text-cream transition">Contato</a></li>
+            </ul>
+          </div>
+          <div>
+            <div class="mono-label mb-4">Serviços</div>
+            <ul class="space-y-2.5 text-[14px]">
+              <li><a href="#servicos" class="text-cream/80 hover:text-cream transition">Sites premium</a></li>
+              <li><a href="#servicos" class="text-cream/80 hover:text-cream transition">Landing pages</a></li>
+              <li><a href="#servicos" class="text-cream/80 hover:text-cream transition">Rebranding</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div class="mono-label mb-4">Conecte-se</div>
+          <div class="flex gap-3 mb-6">
+            <a href="https://instagram.com" target="_blank" rel="noopener" class="w-10 h-10 border border-line rounded flex items-center justify-center text-cream/70 hover:text-cream hover:border-cream/30 transition" aria-label="Instagram">
+              <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="18" cy="6" r="1" fill="currentColor"/></svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener" class="w-10 h-10 border border-line rounded flex items-center justify-center text-cream/70 hover:text-cream hover:border-cream/30 transition" aria-label="LinkedIn">
+              <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 10-4 0v7h-4v-12h4v2a4 4 0 014-2zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z"/></svg>
+            </a>
+            <a href="https://github.com" target="_blank" rel="noopener" class="w-10 h-10 border border-line rounded flex items-center justify-center text-cream/70 hover:text-cream hover:border-cream/30 transition" aria-label="GitHub">
+              <svg width="16" height="16" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+            </a>
+          </div>
+          <a href="https://wa.me/5511000000000" target="_blank" rel="noopener" class="text-[13px] text-cream/80 hover:text-gold transition inline-flex items-center gap-2">
+            <svg width="14" height="14" viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="1.5"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>
+            +55 11 9 0000-0000
+          </a>
+        </div>
+      </div>
+
+      <div class="border-t border-line pt-6 flex flex-col md:flex-row gap-3 md:items-center justify-between">
+        <div class="font-mono text-[10px] text-warm/80 tracking-[0.16em] uppercase">
+          © 2026 FRD · Felipe Réssio Development
+        </div>
+        <div class="font-mono text-[10px] text-warm/60 tracking-[0.14em] uppercase flex flex-wrap gap-x-3 gap-y-1 items-center">
+          <span>Built with Next.js</span>
+          <span class="opacity-50">·</span>
+          <span>Deployed on Vercel</span>
+          <span class="opacity-50">·</span>
+          <span>Code on GitHub</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+</main>
+
+<!-- ============== FLOATING WHATSAPP ============== -->
+<a id="wa-float" href="https://wa.me/5511000000000?text=Olá%20Felipe,%20vim%20do%20site%20FRD" target="_blank" rel="noopener" aria-label="Falar no WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1-.2.3-.7.9-.9 1.1-.2.2-.3.2-.6.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2 0-.4 0-.5 0-.1-.7-1.6-.9-2.2-.2-.6-.5-.5-.7-.5-.2 0-.4 0-.6 0-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.1 3.3 5.2 4.6 2 .8 2.7.9 3.7.7.6-.1 1.7-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.2-.3-.2-.6-.4zM12 2C6.5 2 2 6.5 2 12c0 1.8.5 3.5 1.3 5L2 22l5.1-1.3c1.5.8 3.2 1.3 4.9 1.3 5.5 0 10-4.5 10-10S17.5 2 12 2zm0 18.2c-1.6 0-3.1-.4-4.4-1.2l-.3-.2-3.2.8.9-3.1-.2-.3C3.9 15 3.5 13.5 3.5 12c0-4.7 3.8-8.5 8.5-8.5s8.5 3.8 8.5 8.5-3.8 8.2-8.5 8.2z"/></svg>
+</a>
+
+<!-- ============== SCRIPTS ============== -->
+<script>
+'use strict';
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ============== I18N — STATIC TEXT DICTIONARY ============== */
+const I18N_STATIC = {
+  // Navbar
+  "Serviços": { en: "Services", es: "Servicios" },
+  "Processo": { en: "Process", es: "Proceso" },
+  "Projetos": { en: "Projects", es: "Proyectos" },
+  "Sobre": { en: "About", es: "Sobre mí" },
+  "Contato": { en: "Contact", es: "Contacto" },
+  "Solicitar orçamento": { en: "Request a quote", es: "Solicitar presupuesto" },
+
+  // Hero
+  "Disponível para novos projetos · Brasil & internacional": { en: "Available for new projects · Brazil & international", es: "Disponible para nuevos proyectos · Brasil e internacional" },
+  "Sites que vendem": { en: "Websites that sell", es: "Sitios que venden" },
+  "para": { en: "for", es: "para" },
+  "Desenvolvimento web sob medida para profissionais que recusam o genérico.": { en: "Custom web development for professionals who refuse the generic.", es: "Desarrollo web a medida para profesionales que rechazan lo genérico." },
+  "Iniciar projeto": { en: "Start a project", es: "Iniciar proyecto" },
+  "Ver trabalhos": { en: "View work", es: "Ver trabajos" },
+  "Scroll": { en: "Scroll", es: "Scroll" },
+
+  // Services
+  "/ serviços": { en: "/ services", es: "/ servicios" },
+  "O que construímos": { en: "What we build", es: "Lo que construimos" },
+  "Três frentes. Um padrão único de execução.\n          Selecione a frente que mais combina com o seu momento — ou conversaremos para definir.": { en: "Three fronts. One singular standard of execution.\n          Pick the one that best fits your moment — or let's talk it through.", es: "Tres frentes. Un único estándar de ejecución.\n          Elige la que mejor se ajuste a tu momento — o lo definimos juntos." },
+  "SERVIÇO / 01": { en: "SERVICE / 01", es: "SERVICIO / 01" },
+  "SERVIÇO / 02": { en: "SERVICE / 02", es: "SERVICIO / 02" },
+  "SERVIÇO / 03": { en: "SERVICE / 03", es: "SERVICIO / 03" },
+  "CONSTRUÇÃO DE SITES": { en: "WEBSITE BUILD", es: "CONSTRUCCIÓN DE SITIOS" },
+  "LANDING PAGES": { en: "LANDING PAGES", es: "LANDING PAGES" },
+  "REBRANDING DIGITAL": { en: "DIGITAL REBRANDING", es: "REBRANDING DIGITAL" },
+  "Sites institucionais e portfólios construídos do zero. Performance, design e SEO desde a primeira linha de código.": { en: "Corporate sites and portfolios built from scratch. Performance, design and SEO from the first line of code.", es: "Sitios institucionales y portafolios construidos desde cero. Rendimiento, diseño y SEO desde la primera línea de código." },
+  "Páginas de conversão calibradas para campanhas, lançamentos e captação de leads qualificados.": { en: "Conversion-tuned pages for campaigns, launches and qualified lead capture.", es: "Páginas de conversión calibradas para campañas, lanzamientos y captación de leads cualificados." },
+  "Transformamos sites desatualizados em ativos digitais à altura da sua marca atual. Mais rápido, mais bonito, mais lucrativo.": { en: "We turn outdated sites into digital assets that match your current brand. Faster, more beautiful, more profitable.", es: "Transformamos sitios obsoletos en activos digitales a la altura de tu marca actual. Más rápido, más bonito, más rentable." },
+
+  // Process
+  "/ processo": { en: "/ process", es: "/ proceso" },
+  "Como trabalhamos": { en: "How we work", es: "Cómo trabajamos" },
+  "Quatro etapas. Auto-rotação a cada cinco segundos —\n          ou clique em qualquer uma para fixar.": { en: "Four stages. Auto-rotates every five seconds —\n          or click any one to pin it.", es: "Cuatro etapas. Rotación automática cada cinco segundos —\n          o haz clic en cualquiera para fijarla." },
+  "ETAPA · 01": { en: "STAGE · 01", es: "ETAPA · 01" },
+  "ETAPA · 02": { en: "STAGE · 02", es: "ETAPA · 02" },
+  "ETAPA · 03": { en: "STAGE · 03", es: "ETAPA · 03" },
+  "ETAPA · 04": { en: "STAGE · 04", es: "ETAPA · 04" },
+  "Diagnóstico": { en: "Diagnosis", es: "Diagnóstico" },
+  "Design": { en: "Design", es: "Diseño" },
+  "Desenvolvimento": { en: "Development", es: "Desarrollo" },
+  "Entrega & Suporte": { en: "Delivery & Support", es: "Entrega y Soporte" },
+  "Análise da sua marca, mercado e concorrência. Definimos juntos o que faz seu site vender.\n                Workshops, reuniões e leitura técnica do que existe hoje.": { en: "Analysis of your brand, market and competition. Together we define what makes your site sell.\n                Workshops, meetings and a technical reading of what exists today.", es: "Análisis de tu marca, mercado y competencia. Definimos juntos qué hace que tu sitio venda.\n                Workshops, reuniones y lectura técnica de lo que existe hoy." },
+  "Direção visual exclusiva. Nada de templates. Cada projeto recebe uma identidade pensada do zero,\n                validada em wireframes e levada à exaustão até atingir o tom certo.": { en: "Exclusive visual direction. No templates. Every project gets an identity built from scratch,\n                validated in wireframes and refined until it hits the right tone.", es: "Dirección visual exclusiva. Nada de plantillas. Cada proyecto recibe una identidad pensada desde cero,\n                validada en wireframes y refinada hasta lograr el tono adecuado." },
+  "Código limpo, performance obsessiva, responsividade impecável.\n                Stack moderna: Next.js, Tailwind, Framer Motion. Versionamento e revisões a cada sprint.": { en: "Clean code, obsessive performance, impeccable responsiveness.\n                Modern stack: Next.js, Tailwind, Framer Motion. Versioning and reviews every sprint.", es: "Código limpio, rendimiento obsesivo, responsividad impecable.\n                Stack moderno: Next.js, Tailwind, Framer Motion. Versionado y revisiones cada sprint." },
+  "Deploy, domínio, monitoramento e analytics configurados.\n                E continuamos disponíveis após o lançamento — porque um site vive, evolui e cresce.": { en: "Deploy, domain, monitoring and analytics configured.\n                And we stay available after launch — because a site lives, evolves and grows.", es: "Deploy, dominio, monitorización y analítica configurados.\n                Y seguimos disponibles tras el lanzamiento — porque un sitio vive, evoluciona y crece." },
+  "Arquitetura": { en: "Architecture", es: "Arquitectura" },
+  "Prototipagem": { en: "Prototyping", es: "Prototipado" },
+  "Animações": { en: "Animations", es: "Animaciones" },
+  "Acessibilidade": { en: "Accessibility", es: "Accesibilidad" },
+  "SEO técnico": { en: "Technical SEO", es: "SEO técnico" },
+  "Suporte 30d": { en: "30d Support", es: "Soporte 30d" },
+  "Auto · 5s": { en: "Auto · 5s", es: "Auto · 5s" },
+
+  // Projects
+  "/ trabalhos selecionados": { en: "/ selected work", es: "/ trabajos seleccionados" },
+  "FEITO": { en: "MADE", es: "HECHO" },
+  "VENDER": { en: "TO SELL", es: "PARA VENDER" },
+  "Cliente": { en: "Client", es: "Cliente" },
+  "Categoria": { en: "Category", es: "Categoría" },
+  "Link": { en: "Link", es: "Enlace" },
+  "Ver projeto": { en: "View project", es: "Ver proyecto" },
+
+  // Project mocks (visible text in browser frames)
+  "Odontologia Estética": { en: "Aesthetic Dentistry", es: "Odontología Estética" },
+  "Sorrisos construídos com método.": { en: "Smiles built with method.", es: "Sonrisas construidas con método." },
+  "Clínica boutique em Pinheiros, especializada em harmonização e implantes.": { en: "Boutique clinic in Pinheiros, specialized in harmonization and implants.", es: "Clínica boutique en Pinheiros, especializada en armonización e implantes." },
+  "Agendar consulta": { en: "Book a consultation", es: "Reservar consulta" },
+  "Clínica Máxxima": { en: "Máxxima Clinic", es: "Clínica Máxxima" },
+  "Ortopedia de precisão": { en: "Precision orthopedics", es: "Ortopedia de precisión" },
+  "Equipe": { en: "Team", es: "Equipo" },
+  "Especialistas": { en: "Specialists", es: "Especialistas" },
+  "+ Agendar": { en: "+ Book", es: "+ Reservar" },
+  "Aura · Advocacia Empresarial": { en: "Aura · Corporate Law", es: "Aura · Derecho Empresarial" },
+  "Tributário": { en: "Tax", es: "Tributario" },
+  "Contratual": { en: "Contracts", es: "Contractual" },
+  "Empresarial": { en: "Corporate", es: "Empresarial" },
+  "Vértice · Real Estate": { en: "Vértice · Real Estate", es: "Vértice · Real Estate" },
+  "Coberturas em Jardins": { en: "Penthouses in Jardins", es: "Áticos en Jardins" },
+  "Área": { en: "Area", es: "Área" },
+  "Suítes": { en: "Suites", es: "Suites" },
+
+  // About
+  "/ sobre": { en: "/ about", es: "/ sobre" },
+  "Um estúdio.": { en: "One studio.", es: "Un estudio." },
+  "Um padrão.": { en: "One standard.", es: "Un estándar." },
+  "Um compromisso.": { en: "One commitment.", es: "Un compromiso." },
+  "FRD é o estúdio de desenvolvimento web de Felipe Réssio.\n          Construo sites sob medida com Next.js, Tailwind e Framer Motion.\n          Sem templates, sem WordPress, sem atalhos.": { en: "FRD is Felipe Réssio's web development studio.\n          I build custom sites with Next.js, Tailwind and Framer Motion.\n          No templates, no WordPress, no shortcuts.", es: "FRD es el estudio de desarrollo web de Felipe Réssio.\n          Construyo sitios a medida con Next.js, Tailwind y Framer Motion.\n          Sin plantillas, sin WordPress, sin atajos." },
+  "Cada projeto começa do zero e termina com performance, design e SEO calibrados para conversão.\n          Operação enxuta — poucos clientes por trimestre, dedicação total.": { en: "Every project starts from scratch and ends with performance, design and SEO tuned for conversion.\n          Lean operation — few clients per quarter, total dedication.", es: "Cada proyecto comienza desde cero y termina con rendimiento, diseño y SEO calibrados para la conversión.\n          Operación esbelta — pocos clientes por trimestre, dedicación total." },
+  "São Paulo · BR": { en: "São Paulo · BR", es: "São Paulo · BR" },
+  "Remoto": { en: "Remote", es: "Remoto" },
+  "PT · EN": { en: "PT · EN · ES", es: "PT · EN · ES" },
+  "Founder": { en: "Founder", es: "Founder" },
+  "Felipe Réssio": { en: "Felipe Réssio", es: "Felipe Réssio" },
+  "Designer & Desenvolvedor": { en: "Designer & Developer", es: "Diseñador y Desarrollador" },
+  "Um site não é um produto. É a primeira conversa.": { en: "A website isn't a product. It's the first conversation.", es: "Un sitio no es un producto. Es la primera conversación." },
+
+  // Metrics
+  "Projetos entregues": { en: "Projects delivered", es: "Proyectos entregados" },
+  "Setores atendidos": { en: "Industries served", es: "Sectores atendidos" },
+  "Mobile-first": { en: "Mobile-first", es: "Mobile-first" },
+  "Carregamento médio": { en: "Average load time", es: "Tiempo medio de carga" },
+
+  // Testimonials
+  "/ o que dizem": { en: "/ what they say", es: "/ lo que dicen" },
+  "Clientes que confiaram": { en: "Clients who trusted us", es: "Clientes que confiaron" },
+
+  // Contact
+  "/ contato": { en: "/ contact", es: "/ contacto" },
+  "Vamos construir o próximo.": { en: "Let's build the next one.", es: "Construyamos el próximo." },
+  "Resposta em até 24h. Orçamento sem compromisso.": { en: "Reply within 24h. Quote with no strings attached.", es: "Respuesta en hasta 24h. Presupuesto sin compromiso." },
+  "Email": { en: "Email", es: "Email" },
+  "WhatsApp": { en: "WhatsApp", es: "WhatsApp" },
+  "Localização": { en: "Location", es: "Ubicación" },
+  "São Paulo, SP · Brasil": { en: "São Paulo, SP · Brazil", es: "São Paulo, SP · Brasil" },
+  "Nome": { en: "Name", es: "Nombre" },
+  "Empresa / Profissão": { en: "Company / Profession", es: "Empresa / Profesión" },
+  "Tipo de projeto": { en: "Project type", es: "Tipo de proyecto" },
+  "Mensagem": { en: "Message", es: "Mensaje" },
+  "Enviar mensagem": { en: "Send message", es: "Enviar mensaje" },
+  "Resposta imediata": { en: "Immediate reply", es: "Respuesta inmediata" },
+  "Prefere conversar agora?": { en: "Prefer to talk now?", es: "¿Prefieres hablar ahora?" },
+
+  // Placeholders & select options
+  "Como devemos chamar você?": { en: "What should we call you?", es: "¿Cómo te llamamos?" },
+  "Clínica, escritório, marca...": { en: "Clinic, firm, brand...", es: "Clínica, despacho, marca..." },
+  "Conte um pouco sobre o seu projeto...": { en: "Tell us a bit about your project...", es: "Cuéntanos un poco sobre tu proyecto..." },
+  "Selecione...": { en: "Select...", es: "Selecciona..." },
+  "Site novo": { en: "New website", es: "Sitio nuevo" },
+  "Landing page": { en: "Landing page", es: "Landing page" },
+  "Rebranding": { en: "Rebranding", es: "Rebranding" },
+  "Outro": { en: "Other", es: "Otro" },
+
+  // Footer
+  "Desenvolvimento web premium · São Paulo, Brasil. Operação enxuta, padrão obsessivo.": { en: "Premium web development · São Paulo, Brazil. Lean operation, obsessive standard.", es: "Desarrollo web premium · São Paulo, Brasil. Operación esbelta, estándar obsesivo." },
+  "Navegar": { en: "Navigate", es: "Navegar" },
+  "Sites premium": { en: "Premium websites", es: "Sitios premium" },
+  "Conecte-se": { en: "Connect", es: "Conéctate" },
+  "© 2026 FRD · Felipe Réssio Development": { en: "© 2026 FRD · Felipe Réssio Development", es: "© 2026 FRD · Felipe Réssio Development" }
+};
+
+/* ============== I18N — DYNAMIC CONTENT ============== */
+const I18N_DYNAMIC = {
+  rotateWords: {
+    pt: ['clínicas.', 'advogados.', 'imobiliárias.', 'marcas.', 'você.'],
+    en: ['clinics.', 'law firms.', 'real estate.', 'brands.', 'you.'],
+    es: ['clínicas.', 'abogados.', 'inmobiliarias.', 'marcas.', 'ti.']
+  },
+  svcCaptions: {
+    pt: ['Clinica Essência — Construção', 'Hyperion — Landing Page', 'Máxxima Ortopedia — Rebranding'],
+    en: ['Clinica Essência — Build', 'Hyperion — Landing Page', 'Máxxima Ortopedia — Rebranding'],
+    es: ['Clinica Essência — Construcción', 'Hyperion — Landing Page', 'Máxxima Ortopedia — Rebranding']
+  },
+  projectMeta: {
+    pt: {
+      0: { client: 'Clinica Essência', cat: 'Odontologia Estética', stack: 'Next.js · Sanity · GSAP', url: 'https://odontologiaessencia.ia.br/' },
+      1: { client: 'Máxxima Ortopedia', cat: 'Saúde · Rebrand', stack: 'Next.js · Tailwind · Framer', url: '' },
+      2: { client: 'AURA Advocacia', cat: 'Direito Empresarial', stack: 'Astro · TypeScript · CMS', url: '' },
+      3: { client: 'Vértice Imóveis', cat: 'Real Estate Premium', stack: 'Next.js · Sanity · Three.js', url: '' },
+      4: { client: 'Trade Tires', cat: 'Automotivo · 4×4 Off-Road', stack: 'Next.js · Tailwind · Supabase', url: 'https://www.tradetires.com.br/' }
+    },
+    en: {
+      0: { client: 'Clinica Essência', cat: 'Aesthetic Dentistry', stack: 'Next.js · Sanity · GSAP', url: 'https://odontologiaessencia.ia.br/' },
+      1: { client: 'Máxxima Orthopedics', cat: 'Health · Rebrand', stack: 'Next.js · Tailwind · Framer', url: '' },
+      2: { client: 'AURA Law Firm', cat: 'Corporate Law', stack: 'Astro · TypeScript · CMS', url: '' },
+      3: { client: 'Vértice Real Estate', cat: 'Premium Real Estate', stack: 'Next.js · Sanity · Three.js', url: '' },
+      4: { client: 'Trade Tires', cat: 'Automotive · 4×4 Off-Road', stack: 'Next.js · Tailwind · Supabase', url: 'https://www.tradetires.com.br/' }
+    },
+    es: {
+      0: { client: 'Clinica Essência', cat: 'Odontología Estética', stack: 'Next.js · Sanity · GSAP', url: 'https://odontologiaessencia.ia.br/' },
+      1: { client: 'Máxxima Ortopedia', cat: 'Salud · Rebrand', stack: 'Next.js · Tailwind · Framer', url: '' },
+      2: { client: 'AURA Abogados', cat: 'Derecho Empresarial', stack: 'Astro · TypeScript · CMS', url: '' },
+      3: { client: 'Vértice Inmobiliaria', cat: 'Inmobiliaria Premium', stack: 'Next.js · Sanity · Three.js', url: '' },
+      4: { client: 'Trade Tires', cat: 'Automotriz · 4×4 Off-Road', stack: 'Next.js · Tailwind · Supabase', url: 'https://www.tradetires.com.br/' }
+    }
+  },
+  testimonials: {
+    pt: [
+      { quote: 'Felipe transformou nossa presença digital. Recebemos elogios de pacientes que antes nem mencionavam o site.', name: 'Dra. Mariana Costa', role: 'Odontologia · Pinheiros, SP' },
+      { quote: 'Profissionalismo absurdo. O processo foi cirúrgico — três reuniões, briefing claro e entrega no prazo.', name: 'Dr. Ricardo Leal', role: 'Ortopedia · Vila Olímpia' },
+      { quote: 'Nossa landing page de captação saiu de 1.8% para 6.4% de conversão. Pagou o investimento em um mês.', name: 'Camila Brandão', role: 'Marketing · Hyperion' },
+      { quote: 'O rebranding fez parecer que mudamos de patamar. Clientes premium passaram a nos procurar sozinhos.', name: 'Henrique Vidal', role: 'Sócio · Vértice Imóveis' },
+      { quote: 'Sem firula, sem desculpa, sem template. Entregou exatamente o que prometeu — e ainda surpreendeu.', name: 'Dr. Eduardo Tonioli', role: 'Advocacia · AURA' },
+      { quote: 'Atendimento à altura do produto. Felipe entende design, código e — raro — entende negócio.', name: 'Fernanda Salles', role: 'Diretora · Clinica Essência' }
+    ],
+    en: [
+      { quote: 'Felipe transformed our digital presence. We get compliments from patients who never even mentioned the site before.', name: 'Dr. Mariana Costa', role: 'Dentistry · Pinheiros, SP' },
+      { quote: 'Absurd professionalism. The process was surgical — three meetings, clear briefing, on-time delivery.', name: 'Dr. Ricardo Leal', role: 'Orthopedics · Vila Olímpia' },
+      { quote: 'Our lead-capture landing page went from 1.8% to 6.4% conversion. It paid for itself in a month.', name: 'Camila Brandão', role: 'Marketing · Hyperion' },
+      { quote: 'The rebranding made it feel like we moved up a tier. Premium clients started coming to us on their own.', name: 'Henrique Vidal', role: 'Partner · Vértice Real Estate' },
+      { quote: 'No frills, no excuses, no template. Delivered exactly what was promised — and still surprised us.', name: 'Dr. Eduardo Tonioli', role: 'Law · AURA' },
+      { quote: 'Service worthy of the product. Felipe gets design, code and — rare — gets business.', name: 'Fernanda Salles', role: 'Director · Clinica Essência' }
+    ],
+    es: [
+      { quote: 'Felipe transformó nuestra presencia digital. Recibimos elogios de pacientes que antes ni mencionaban el sitio.', name: 'Dra. Mariana Costa', role: 'Odontología · Pinheiros, SP' },
+      { quote: 'Profesionalismo absurdo. El proceso fue quirúrgico — tres reuniones, briefing claro y entrega a tiempo.', name: 'Dr. Ricardo Leal', role: 'Ortopedia · Vila Olímpia' },
+      { quote: 'Nuestra landing de captación pasó de 1.8% a 6.4% de conversión. Se pagó sola en un mes.', name: 'Camila Brandão', role: 'Marketing · Hyperion' },
+      { quote: 'El rebranding hizo que pareciera que subimos de nivel. Clientes premium empezaron a buscarnos solos.', name: 'Henrique Vidal', role: 'Socio · Vértice Inmobiliaria' },
+      { quote: 'Sin adornos, sin excusas, sin plantilla. Entregó exactamente lo que prometió — y aun así sorprendió.', name: 'Dr. Eduardo Tonioli', role: 'Abogacía · AURA' },
+      { quote: 'Atención a la altura del producto. Felipe entiende diseño, código y — raro — entiende negocio.', name: 'Fernanda Salles', role: 'Directora · Clinica Essência' }
+    ]
+  },
+  form: {
+    pt: {
+      missing: '> Preencha nome, WhatsApp e tipo de projeto.',
+      greeting: 'Olá Felipe, sou',
+      type: 'Tipo',
+      defaultMsg: 'Gostaria de conversar sobre um projeto.',
+      redirecting: '> Redirecionando para o WhatsApp...'
+    },
+    en: {
+      missing: '> Please fill in name, WhatsApp and project type.',
+      greeting: 'Hi Felipe, this is',
+      type: 'Type',
+      defaultMsg: "I'd like to discuss a project.",
+      redirecting: '> Redirecting to WhatsApp...'
+    },
+    es: {
+      missing: '> Completa nombre, WhatsApp y tipo de proyecto.',
+      greeting: 'Hola Felipe, soy',
+      type: 'Tipo',
+      defaultMsg: 'Me gustaría hablar sobre un proyecto.',
+      redirecting: '> Redirigiendo a WhatsApp...'
+    }
+  },
+  tAria: {
+    pt: { prev: 'Anterior', next: 'Próximo', dot: 'Depoimento ' },
+    en: { prev: 'Previous', next: 'Next', dot: 'Testimonial ' },
+    es: { prev: 'Anterior', next: 'Siguiente', dot: 'Testimonio ' }
+  }
+};
+
+/* ============== I18N — STATE + APPLY ============== */
+window.__currentLang = (function () {
+  try { return localStorage.getItem('frd-lang') || 'pt'; } catch (e) { return 'pt'; }
+})();
+window.__textNodeMap = null; // populated lazily
+window.__rerenderHooks = [];
+
+function getLang() { return window.__currentLang; }
+
+function snapshotStaticText() {
+  if (window.__textNodeMap) return;
+  window.__textNodeMap = [];
+  const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+    acceptNode: function (node) {
+      const parent = node.parentElement;
+      if (!parent) return NodeFilter.FILTER_REJECT;
+      if (parent.closest('[data-no-i18n]')) return NodeFilter.FILTER_REJECT;
+      const tag = parent.tagName;
+      if (tag === 'SCRIPT' || tag === 'STYLE' || tag === 'NOSCRIPT') return NodeFilter.FILTER_REJECT;
+      const trimmed = node.textContent.replace(/\s+/g, ' ').trim();
+      if (!trimmed) return NodeFilter.FILTER_REJECT;
+      // Match either exact or with normalized whitespace
+      if (I18N_STATIC[node.textContent] || I18N_STATIC[trimmed]) return NodeFilter.FILTER_ACCEPT;
+      return NodeFilter.FILTER_REJECT;
+    }
+  });
+  let n;
+  while ((n = walker.nextNode())) {
+    const original = n.textContent;
+    const key = I18N_STATIC[original] ? original : original.replace(/\s+/g, ' ').trim();
+    window.__textNodeMap.push({ node: n, originalText: original, key: key });
+  }
+}
+
+function applyStaticText(lang) {
+  snapshotStaticText();
+  for (const entry of window.__textNodeMap) {
+    if (lang === 'pt') {
+      entry.node.textContent = entry.originalText;
+    } else {
+      const dict = I18N_STATIC[entry.key];
+      if (!dict) continue;
+      const translated = dict[lang] || entry.key;
+      // Preserve leading/trailing whitespace from the original
+      const m = entry.originalText.match(/^(\s*)([\s\S]*?)(\s*)$/);
+      entry.node.textContent = (m ? m[1] : '') + translated + (m ? m[3] : '');
+    }
+  }
+}
+
+function applyI18nAttributes(lang) {
+  // Placeholders
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+    const key = el.getAttribute('data-i18n-placeholder');
+    const dict = I18N_STATIC[key];
+    if (lang === 'pt' || !dict) { el.placeholder = key; return; }
+    el.placeholder = dict[lang] || key;
+  });
+  // Select options
+  document.querySelectorAll('[data-i18n-opt]').forEach(el => {
+    const key = el.getAttribute('data-i18n-opt');
+    const dict = I18N_STATIC[key];
+    if (lang === 'pt' || !dict) { el.textContent = key; return; }
+    el.textContent = dict[lang] || key;
+  });
+  // Document lang
+  document.documentElement.lang = lang === 'pt' ? 'pt-BR' : lang;
+}
+
+function setLang(lang) {
+  if (!['pt', 'en', 'es'].includes(lang)) lang = 'pt';
+  window.__currentLang = lang;
+  try { localStorage.setItem('frd-lang', lang); } catch (e) {}
+  applyStaticText(lang);
+  applyI18nAttributes(lang);
+  // Update lang button states
+  document.querySelectorAll('.lang-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.lang === lang);
+  });
+  // Fire rerender hooks for dynamic content
+  window.__rerenderHooks.forEach(fn => { try { fn(lang); } catch (e) { console.error(e); } });
+}
+
+// Bind lang buttons (delegated, runs after DOM is ready)
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest && e.target.closest('.lang-btn');
+  if (!btn) return;
+  const lang = btn.dataset.lang;
+  if (lang) setLang(lang);
+});
+
+/* ============== LENIS SMOOTH SCROLL ============== */
+let lenis;
+if (!reducedMotion && window.Lenis) {
+  lenis = new Lenis({
+    duration: 1.0,
+    easing: t => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    smoothWheel: true,
+    smoothTouch: false
+  });
+  function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
+  requestAnimationFrame(raf);
+  if (window.ScrollTrigger) {
+    lenis.on('scroll', ScrollTrigger.update);
+    gsap.ticker.add(t => lenis.raf(t * 1000));
+    gsap.ticker.lagSmoothing(0);
+  }
+}
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', (e) => {
+    const id = a.getAttribute('href');
+    if (id.length > 1 && document.querySelector(id)) {
+      e.preventDefault();
+      const tgt = document.querySelector(id);
+      if (lenis) lenis.scrollTo(tgt, { offset: -60 });
+      else tgt.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      document.getElementById('mobile-menu').classList.add('hidden');
+    }
+  });
+});
+
+/* ============== NAVBAR SCROLL ============== */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  if (window.scrollY > 30) nav.classList.add('scrolled');
+  else nav.classList.remove('scrolled');
+});
+document.getElementById('menu-btn').addEventListener('click', () => {
+  document.getElementById('mobile-menu').classList.toggle('hidden');
+});
+
+/* ============== TERMINAL BACKGROUND ============== */
+(function terminal() {
+  if (reducedMotion) return;
+  const track = document.getElementById('term-track');
+  if (!track) return;
+  const lines = [
+    '$ pnpm create next-app essencia-site',
+    '✓ Installed in 2.4s',
+    '$ cd essencia-site && pnpm dev',
+    '→ Ready on http://localhost:3000',
+    '',
+    '$ git commit -m "feat: hero section + GSAP scroll triggers"',
+    '[main 7a3f2b1] feat: hero section + GSAP scroll triggers',
+    '',
+    '$ vercel --prod',
+    '✓ Production: https://odontologiaessencia.ia.br',
+    '✓ Build complete in 14s',
+    '',
+    '$ lighthouse --view --preset=desktop https://odontologiaessencia.ia.br',
+    '→ Performance:   98',
+    '→ Accessibility: 97',
+    '→ Best Practices: 100',
+    '→ SEO:           100',
+    '',
+    '$ pnpm tsc --noEmit',
+    '✓ 0 errors · 218 files checked',
+    '',
+    '$ git push origin main',
+    'Enumerating objects: 47, done.',
+    'Writing objects: 100% (47/47), 12.4 KiB | 4.13 MiB/s, done.',
+    '→ Deployed: maxxima-ortopedia.com.br',
+    '',
+    '$ npm run build',
+    '✓ Compiled successfully',
+    '○ /                 4.2 kB',
+    '○ /servicos         3.8 kB',
+    '○ /projetos         5.1 kB',
+    '○ /contato          3.4 kB'
+  ];
+  // duplicate so the loop is seamless
+  track.textContent = lines.concat(lines).join('\n');
+})();
+
+/* ============== HERO TEXT ROTATE — stagger per character ============== */
+(function rotate() {
+  const target = document.getElementById('rotate-word');
+  if (!target) return;
+  let words = I18N_DYNAMIC.rotateWords[getLang()] || I18N_DYNAMIC.rotateWords.pt;
+  let i = 0;
+  let timeoutId = null;
+
+  function showWord(word) {
+    target.innerHTML = '';
+    const chars = [...word];
+    chars.forEach((ch, idx) => {
+      const span = document.createElement('span');
+      span.className = 'rotate-char';
+      span.textContent = ch === ' ' ? '\u00A0' : ch;
+      target.appendChild(span);
+      requestAnimationFrame(() => {
+        setTimeout(() => span.classList.add('in'), 25 * idx);
+      });
+    });
+  }
+
+  function hideWord(after) {
+    const chars = target.querySelectorAll('.rotate-char');
+    chars.forEach((c, idx) => {
+      setTimeout(() => {
+        c.classList.remove('in');
+        c.classList.add('out');
+      }, 18 * idx);
+    });
+    setTimeout(after, 18 * chars.length + 280);
+  }
+
+  showWord(words[i % words.length]);
+  if (reducedMotion) {
+    window.__rerenderHooks.push((lang) => {
+      words = I18N_DYNAMIC.rotateWords[lang] || I18N_DYNAMIC.rotateWords.pt;
+      i = 0;
+      showWord(words[0]);
+    });
+    return;
+  }
+
+  function tick() {
+    timeoutId = setTimeout(() => {
+      hideWord(() => {
+        i = (i + 1) % words.length;
+        showWord(words[i]);
+        tick();
+      });
+    }, 2200);
+  }
+  tick();
+
+  window.__rerenderHooks.push((lang) => {
+    words = I18N_DYNAMIC.rotateWords[lang] || I18N_DYNAMIC.rotateWords.pt;
+    i = 0;
+    // Re-show current word with new language; tick continues
+    showWord(words[0]);
+  });
+})();
+
+/* ============== SERVICES HOVER SLIDER ============== */
+(function services() {
+  const overlays = [
+    // 01 — Construção
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500' preserveAspectRatio='xMidYMid slice'>
+      <rect width='400' height='500' fill='#0c0a07'/>
+      <text x='30' y='80' fill='#D4A86A' font-family='JetBrains Mono' font-size='10' letter-spacing='3'>CLINICA ESSÊNCIA · ODONTOLOGIA</text>
+      <text x='30' y='180' fill='#F5F1E8' font-family='Space Grotesk' font-size='48' font-weight='500' letter-spacing='-2'>Sorrisos</text>
+      <text x='30' y='230' fill='#F5F1E8' font-family='Space Grotesk' font-size='48' font-weight='500' letter-spacing='-2'>construídos</text>
+      <text x='30' y='280' fill='#F5F1E8' font-family='Space Grotesk' font-size='48' font-weight='500' letter-spacing='-2'>com método.</text>
+      <line x1='30' y1='340' x2='370' y2='340' stroke='rgba(245,241,232,0.1)'/>
+      <text x='30' y='370' fill='#8A8275' font-family='Inter' font-size='11' font-weight='300'>Clínica boutique · Pinheiros, SP</text>
+      <rect x='30' y='420' width='150' height='40' fill='none' stroke='rgba(245,241,232,0.3)'/>
+      <text x='52' y='446' fill='#F5F1E8' font-family='JetBrains Mono' font-size='10' letter-spacing='3'>AGENDAR →</text>
+    </svg>`,
+    // 02 — Landing
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500' preserveAspectRatio='xMidYMid slice'>
+      <rect width='400' height='500' fill='#0c0a07'/>
+      <text x='30' y='60' fill='#D4A86A' font-family='JetBrains Mono' font-size='10' letter-spacing='3'>HYPERION · LANDING</text>
+      <text x='30' y='140' fill='#F5F1E8' font-family='Space Grotesk' font-size='40' font-weight='500' letter-spacing='-2'>Curso de</text>
+      <text x='30' y='180' fill='#F5F1E8' font-family='Space Grotesk' font-size='40' font-weight='500' letter-spacing='-2'>edição cinema</text>
+      <rect x='30' y='220' width='340' height='1' fill='rgba(245,241,232,0.1)'/>
+      <text x='30' y='250' fill='#8A8275' font-family='JetBrains Mono' font-size='10' letter-spacing='2'>PRÓXIMA TURMA · 24 JUN</text>
+      <rect x='30' y='280' width='170' height='44' fill='#D4A86A'/>
+      <text x='52' y='308' fill='#0a0a0a' font-family='JetBrains Mono' font-size='10' letter-spacing='3'>QUERO ENTRAR →</text>
+      <text x='30' y='380' fill='#D4A86A' font-family='JetBrains Mono' font-size='38' font-weight='500' letter-spacing='-1'>+1.240</text>
+      <text x='30' y='405' fill='#8A8275' font-family='JetBrains Mono' font-size='10' letter-spacing='2'>ALUNOS FORMADOS</text>
+    </svg>`,
+    // 03 — Rebrand
+    `<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 400 500' preserveAspectRatio='xMidYMid slice'>
+      <rect width='400' height='500' fill='#0c0a07'/>
+      <text x='30' y='60' fill='#D4A86A' font-family='JetBrains Mono' font-size='10' letter-spacing='3'>MÁXXIMA · REBRAND</text>
+      <text x='30' y='150' fill='#F5F1E8' font-family='Space Grotesk' font-size='42' font-weight='500' letter-spacing='-2'>Ortopedia</text>
+      <text x='30' y='195' fill='#F5F1E8' font-family='Space Grotesk' font-size='42' font-weight='500' letter-spacing='-2'>de precisão.</text>
+      <line x1='30' y1='235' x2='180' y2='235' stroke='#D4A86A' stroke-width='2'/>
+      <g transform='translate(30,280)'>
+        <text fill='#D4A86A' font-family='JetBrains Mono' font-size='36' font-weight='500' letter-spacing='-1'>12</text>
+        <text y='40' fill='#8A8275' font-family='JetBrains Mono' font-size='9' letter-spacing='2'>ESPECIALISTAS</text>
+      </g>
+      <g transform='translate(150,280)'>
+        <text fill='#D4A86A' font-family='JetBrains Mono' font-size='36' font-weight='500' letter-spacing='-1'>26</text>
+        <text y='40' fill='#8A8275' font-family='JetBrains Mono' font-size='9' letter-spacing='2'>ANOS</text>
+      </g>
+      <g transform='translate(240,280)'>
+        <text fill='#D4A86A' font-family='JetBrains Mono' font-size='36' font-weight='500' letter-spacing='-1'>4.9</text>
+        <text y='40' fill='#8A8275' font-family='JetBrains Mono' font-size='9' letter-spacing='2'>GOOGLE</text>
+      </g>
+      <rect x='30' y='400' width='340' height='60' fill='none' stroke='rgba(245,241,232,0.1)'/>
+      <text x='45' y='430' fill='#F5F1E8' font-family='Space Grotesk' font-size='14' font-weight='500'>"Repensamos cada toque."</text>
+      <text x='45' y='450' fill='#8A8275' font-family='JetBrains Mono' font-size='9' letter-spacing='2'>DR. RICARDO LEAL</text>
+    </svg>`
+  ];
+
+  for (let i = 0; i < 3; i++) {
+    const el = document.getElementById('svc-img-' + i);
+    if (!el) continue;
+    const svg = overlays[i].replace(/\n/g, '').replace(/"/g, "'");
+    el.style.backgroundImage = `url("data:image/svg+xml;utf8,${encodeURIComponent(svg)}")`;
+    el.style.backgroundColor = '#0c0a07';
+  }
+
+  const rows = document.querySelectorAll('.svc-row');
+  const images = document.querySelectorAll('.svc-image');
+  const captionEl = document.getElementById('svc-caption');
+  const numEl = document.getElementById('svc-num');
+  let activeIdx = 0;
+
+  function activate(i) {
+    activeIdx = i;
+    rows.forEach(r => r.classList.remove('active'));
+    images.forEach(im => im.classList.remove('active'));
+    rows[i].classList.add('active');
+    images[i].classList.add('active');
+    const caps = I18N_DYNAMIC.svcCaptions[getLang()] || I18N_DYNAMIC.svcCaptions.pt;
+    captionEl.textContent = caps[i];
+    numEl.textContent = String(i + 1).padStart(2, '0');
+  }
+  rows.forEach((r, i) => {
+    r.addEventListener('mouseenter', () => activate(i));
+    r.addEventListener('click', () => activate(i));
+  });
+
+  window.__rerenderHooks.push(() => activate(activeIdx));
+})();
+
+/* ============== PROCESS CAROUSEL ============== */
+(function process() {
+  const tabs = document.querySelectorAll('.process-tab');
+  const cards = document.querySelectorAll('.process-card');
+  const bar = document.getElementById('process-bar-fill');
+  const currentEl = document.getElementById('process-current');
+  let active = 0;
+  let interval;
+  function show(i) {
+    active = i;
+    tabs.forEach(t => t.classList.remove('active'));
+    cards.forEach(c => c.classList.add('hidden'));
+    tabs[i].classList.add('active');
+    cards[i].classList.remove('hidden');
+    currentEl.textContent = String(i + 1).padStart(2, '0');
+    bar.style.transition = 'none';
+    bar.style.transform = 'scaleX(0)';
+    void bar.offsetWidth;
+    bar.style.transition = 'transform 5000ms linear';
+    bar.style.transform = 'scaleX(1)';
+  }
+  function startCycle() {
+    clearInterval(interval);
+    show(active);
+    interval = setInterval(() => {
+      active = (active + 1) % tabs.length;
+      show(active);
+    }, 5000);
+  }
+  tabs.forEach((tab, i) => {
+    tab.addEventListener('click', () => {
+      active = i;
+      startCycle();
+    });
+  });
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) startCycle();
+      else clearInterval(interval);
+    });
+  }, { threshold: 0.3 });
+  obs.observe(document.getElementById('processo'));
+})();
+
+/* ============== PROJECTS CAROUSEL (autoplay) ============== */
+(function projects() {
+  const stage = document.getElementById('projects-carousel');
+  const cards = document.querySelectorAll('.project-card');
+  if (!stage || !cards.length) return;
+
+  const left = document.getElementById('scrub-left');
+  const right = document.getElementById('scrub-right');
+  const indexEl = document.getElementById('proj-index');
+  const metaClient = document.getElementById('meta-client');
+  const metaCat = document.getElementById('meta-cat');
+  const metaStack = document.getElementById('meta-stack');
+  const metaLink = document.getElementById('meta-link');
+  const dotsWrap = document.getElementById('proj-dots');
+  const prevBtn = document.getElementById('proj-prev');
+  const nextBtn = document.getElementById('proj-next');
+  const progress = document.getElementById('proj-progress');
+  const autoplayBtn = document.getElementById('proj-autoplay');
+  const autoplayDot = document.getElementById('proj-autoplay-dot');
+  const autoplayLabel = document.getElementById('proj-autoplay-label');
+
+  const AUTOPLAY_MS = 6000;
+  let activeIdx = 0;
+  let timer = null;
+  let paused = false;
+  let inView = false;
+
+  // build dots
+  cards.forEach((_, i) => {
+    const dot = document.createElement('button');
+    dot.type = 'button';
+    dot.setAttribute('role', 'tab');
+    dot.setAttribute('aria-label', 'Projeto ' + (i + 1));
+    dot.dataset.i = i;
+    dot.className = 'proj-dot h-1.5 rounded-full transition-all duration-500 ease-out';
+    dotsWrap.appendChild(dot);
+  });
+  const dots = dotsWrap.querySelectorAll('.proj-dot');
+
+  function setActive(i) {
+    activeIdx = (i + cards.length) % cards.length;
+    cards.forEach(c => c.classList.remove('active'));
+    cards[activeIdx].classList.add('active');
+    indexEl.textContent = String(activeIdx + 1).padStart(2, '0');
+
+    dots.forEach((d, di) => {
+      if (di === activeIdx) {
+        d.style.width = '28px';
+        d.style.background = 'var(--gold)';
+      } else {
+        d.style.width = '6px';
+        d.style.background = 'rgba(138, 130, 117, 0.35)';
+      }
+    });
+
+    // subtle drift on giant headline words, tied to active index
+    if (left && right) {
+      const p = cards.length > 1 ? activeIdx / (cards.length - 1) : 0;
+      left.style.transform = `translateX(${-p * 18}%)`;
+      right.style.transform = `translateX(${p * 18}%)`;
+    }
+
+    const meta = (window.I18N_DYNAMIC && window.I18N_DYNAMIC.projectMeta[getLang()]) || I18N_DYNAMIC.projectMeta.pt;
+    metaClient.textContent = meta[activeIdx].client;
+    metaCat.textContent = meta[activeIdx].cat;
+    metaStack.textContent = meta[activeIdx].stack;
+    if (metaLink) {
+      const url = meta[activeIdx].url;
+      if (url) {
+        metaLink.setAttribute('href', url);
+        metaLink.classList.remove('pointer-events-none', 'opacity-40');
+      } else {
+        metaLink.setAttribute('href', '#');
+        metaLink.classList.add('pointer-events-none', 'opacity-40');
+      }
+    }
+  }
+
+  function restartProgress() {
+    if (!progress) return;
+    progress.style.transition = 'none';
+    progress.style.transform = 'scaleX(0)';
+    void progress.offsetWidth;
+    if (!paused && inView && !reducedMotion) {
+      progress.style.transition = `transform ${AUTOPLAY_MS}ms linear`;
+      progress.style.transform = 'scaleX(1)';
+    }
+  }
+
+  function next() { setActive(activeIdx + 1); restartProgress(); }
+  function prev() { setActive(activeIdx - 1); restartProgress(); }
+
+  function startAutoplay() {
+    stopAutoplay();
+    if (paused || !inView || reducedMotion) return;
+    restartProgress();
+    timer = setInterval(() => {
+      setActive(activeIdx + 1);
+      restartProgress();
+    }, AUTOPLAY_MS);
+  }
+  function stopAutoplay() {
+    if (timer) { clearInterval(timer); timer = null; }
+  }
+
+  // controls
+  prevBtn.addEventListener('click', () => { prev(); startAutoplay(); });
+  nextBtn.addEventListener('click', () => { next(); startAutoplay(); });
+  dots.forEach((d, i) => {
+    d.addEventListener('click', () => { setActive(i); restartProgress(); startAutoplay(); });
+  });
+
+  if (autoplayBtn) {
+    autoplayBtn.addEventListener('click', () => {
+      paused = !paused;
+      if (paused) {
+        stopAutoplay();
+        progress.style.transition = 'none';
+        progress.style.transform = 'scaleX(0)';
+        autoplayDot.style.background = 'var(--warm)';
+        autoplayLabel.textContent = 'Pausado';
+        autoplayBtn.setAttribute('aria-label', 'Retomar autoplay');
+      } else {
+        autoplayDot.style.background = 'var(--gold)';
+        autoplayLabel.textContent = 'Auto · 6s';
+        autoplayBtn.setAttribute('aria-label', 'Pausar autoplay');
+        startAutoplay();
+      }
+    });
+  }
+
+  // pause on hover (desktop only)
+  if (window.matchMedia('(hover: hover)').matches) {
+    stage.addEventListener('mouseenter', () => { stopAutoplay(); progress.style.transition = 'none'; });
+    stage.addEventListener('mouseleave', () => { if (!paused) startAutoplay(); });
+  }
+
+  // only run when in viewport
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      inView = e.isIntersecting;
+      if (inView) startAutoplay();
+      else stopAutoplay();
+    });
+  }, { threshold: 0.25 });
+  io.observe(stage);
+
+  // keyboard navigation when section is in focus
+  stage.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') { prev(); startAutoplay(); }
+    if (e.key === 'ArrowRight') { next(); startAutoplay(); }
+  });
+
+  // swipe support
+  let touchStartX = null;
+  stage.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; stopAutoplay(); }, { passive: true });
+  stage.addEventListener('touchend', (e) => {
+    if (touchStartX === null) return;
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    if (Math.abs(dx) > 40) { dx < 0 ? next() : prev(); }
+    touchStartX = null;
+    startAutoplay();
+  });
+
+  window.__rerenderHooks.push(() => setActive(activeIdx));
+
+  // initial render
+  setActive(0);
+})();
+
+/* ============== TESTIMONIALS CAROUSEL ============== */
+(function testimonials() {
+  const wrap = document.getElementById('testimonials');
+  const dotsWrap = document.getElementById('t-dots');
+  let active = 0;
+  let autoplay;
+
+  function getData() {
+    return I18N_DYNAMIC.testimonials[getLang()] || I18N_DYNAMIC.testimonials.pt;
+  }
+  function getAria() {
+    return I18N_DYNAMIC.tAria[getLang()] || I18N_DYNAMIC.tAria.pt;
+  }
+
+  function build() {
+    const data = getData();
+    const aria = getAria();
+    wrap.innerHTML = '';
+    dotsWrap.innerHTML = '';
+    data.forEach((t, i) => {
+      const off = i - active;
+      const card = document.createElement('div');
+      card.className = `tcard absolute top-0 left-1/2 w-[88%] md:w-[480px] max-w-[92vw] p-7 md:p-10 ${i === active ? 'center' : ''}`;
+      let translateX, scale, opacity, z;
+      if (off === 0) { translateX = -50; scale = 1; opacity = 1; z = 5; }
+      else if (off === -1 || (off === data.length - 1 && active === 0)) { translateX = -125; scale = 0.86; opacity = 0.45; z = 3; }
+      else if (off === 1 || (off === -(data.length - 1) && active === data.length - 1)) { translateX = 25; scale = 0.86; opacity = 0.45; z = 3; }
+      else if (off === -2 || off === data.length - 2) { translateX = -185; scale = 0.74; opacity = 0.15; z = 1; }
+      else if (off === 2 || off === -(data.length - 2)) { translateX = 85; scale = 0.74; opacity = 0.15; z = 1; }
+      else { opacity = 0; z = 0; translateX = -50; scale = 0.7; }
+      card.style.transform = `translateX(${translateX}%) scale(${scale})`;
+      card.style.opacity = String(opacity);
+      card.style.zIndex = String(z);
+      card.innerHTML = `
+        <div class="relative">
+          <span class="quote-mark absolute -top-2 -left-1" aria-hidden="true">"</span>
+          <p class="font-display font-medium text-cream text-[clamp(1.05rem,1.6vw,1.35rem)] leading-[1.45] pt-8">${t.quote}</p>
+        </div>
+        <div class="border-t border-line mt-6 pt-4">
+          <div class="font-mono text-cream text-[12px] tracking-[0.2em] uppercase">${t.name}</div>
+          <div class="text-warm text-[11px] mt-1 font-light">${t.role}</div>
+        </div>
+      `;
+      wrap.appendChild(card);
+    });
+
+    data.forEach((_, i) => {
+      const dot = document.createElement('button');
+      dot.className = `h-1 rounded-full transition-all duration-300 ${i === active ? 'bg-gold w-6' : 'bg-warm/30 w-1.5'}`;
+      dot.setAttribute('aria-label', aria.dot + (i + 1));
+      dot.addEventListener('click', () => { active = i; build(); resetAutoplay(); });
+      dotsWrap.appendChild(dot);
+    });
+
+    // Update prev/next aria-labels
+    const prev = document.getElementById('t-prev');
+    const next = document.getElementById('t-next');
+    if (prev) prev.setAttribute('aria-label', aria.prev);
+    if (next) next.setAttribute('aria-label', aria.next);
+  }
+
+  function resetAutoplay() {
+    if (reducedMotion) return;
+    clearInterval(autoplay);
+    autoplay = setInterval(() => { active = (active + 1) % getData().length; build(); }, 6000);
+  }
+
+  document.getElementById('t-prev').addEventListener('click', () => {
+    const len = getData().length;
+    active = (active - 1 + len) % len; build(); resetAutoplay();
+  });
+  document.getElementById('t-next').addEventListener('click', () => {
+    active = (active + 1) % getData().length; build(); resetAutoplay();
+  });
+  build();
+  resetAutoplay();
+
+  window.__rerenderHooks.push(() => build());
+})();
+
+/* ============== CTA CIRCUIT ANIMATION ============== */
+(function ctaCircuit() {
+  if (!window.ScrollTrigger) return;
+  const paths = document.querySelectorAll('.cta-circuit path');
+  paths.forEach(p => {
+    gsap.to(p, {
+      strokeDashoffset: 0,
+      duration: 2,
+      ease: 'expo.out',
+      scrollTrigger: { trigger: '#contato', start: 'top 70%' }
+    });
+  });
+})();
+
+/* ============== REVEAL ON SCROLL ============== */
+(function reveal() {
+  const items = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e) => {
+      if (e.isIntersecting) {
+        const i = Array.from(items).indexOf(e.target);
+        setTimeout(() => e.target.classList.add('in'), (i % 4) * 80);
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  items.forEach(el => io.observe(el));
+})();
+
+/* ============== FLOATING WHATSAPP ============== */
+(function whatsappFloat() {
+  const wa = document.getElementById('wa-float');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > window.innerHeight * 0.5) wa.classList.add('visible');
+    else wa.classList.remove('visible');
+  });
+})();
+
+/* ============== FORM ============== */
+(function form() {
+  const form = document.getElementById('contact-form');
+  const fb = document.getElementById('form-feedback');
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const lang = getLang();
+    const f = I18N_DYNAMIC.form[lang] || I18N_DYNAMIC.form.pt;
+    const name = document.getElementById('f-name').value.trim();
+    const wa = document.getElementById('f-wa').value.trim();
+    const type = document.getElementById('f-type').value;
+    const msg = document.getElementById('f-msg').value.trim();
+    if (!name || !wa || !type) {
+      fb.textContent = f.missing;
+      fb.classList.remove('hidden');
+      fb.style.color = '#E8C896';
+      return;
+    }
+    const text = `${f.greeting} ${name}. ${f.type}: ${type}. ${msg || f.defaultMsg} — WhatsApp: ${wa}`;
+    window.open(`https://wa.me/5511000000000?text=${encodeURIComponent(text)}`, '_blank');
+    fb.textContent = f.redirecting;
+    fb.classList.remove('hidden');
+    fb.style.color = '#D4A86A';
+  });
+})();
+
+/* ============== FOOTER LOGO EASTER EGG ============== */
+(function footerLogo() {
+  const logo = document.getElementById('footer-logo');
+  const img = document.getElementById('footer-logo-img');
+  if (!logo || !img) return;
+  logo.addEventListener('mouseenter', () => {
+    img.animate(
+      [
+        { filter: 'drop-shadow(0 0 0 rgba(212,168,106,0))' },
+        { filter: 'drop-shadow(0 0 14px rgba(212,168,106,0.55))' },
+        { filter: 'drop-shadow(0 0 0 rgba(212,168,106,0))' }
+      ],
+      { duration: 1400, easing: 'cubic-bezier(0.16, 1, 0.3, 1)' }
+    );
+  });
+})();
+
+/* ============== I18N — APPLY ON LOAD ============== */
+(function applyInitialLang() {
+  // All other components have registered their rerender hooks by now.
+  setLang(getLang());
+})();
+
+/* ============== LIVE IFRAME SCALING ============== */
+(function liveIframeScale() {
+  // Iframe is 1600x1000 — scale it to fit its parent wrap exactly.
+  const VIRTUAL_W = 1600;
+  function update() {
+    document.querySelectorAll('.live-iframe-wrap').forEach(wrap => {
+      const w = wrap.clientWidth;
+      if (!w) return;
+      wrap.style.setProperty('--iframe-scale', (w / VIRTUAL_W).toFixed(4));
+    });
+  }
+  update();
+  window.addEventListener('resize', update);
+  if (window.ResizeObserver) {
+    const ro = new ResizeObserver(update);
+    document.querySelectorAll('.live-iframe-wrap').forEach(w => ro.observe(w));
+  }
+  // Re-run after fonts/iframes settle
+  window.addEventListener('load', update);
+})();
+</script>
+</body>
+</html>
